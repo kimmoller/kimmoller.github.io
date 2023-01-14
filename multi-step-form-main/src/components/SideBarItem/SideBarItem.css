@@ -1,0 +1,30 @@
+.sidebarItem {
+    display: flex;
+    margin-left: 15%;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.text {
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.number {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border: 1px solid;
+    text-align: center;
+}
+
+.step {
+    color: hsl(231, 11%, 63%);
+}
+
+.topic {
+    font-family: Ubuntu-bold;
+}

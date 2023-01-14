@@ -1,0 +1,14 @@
+.formButton {
+    width: 96px;
+    height: 48px;
+    color: hsl(231, 100%, 99%);
+    background-color: hsl(213, 96%, 18%);
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+    font-family: Ubuntu-medium;
+}
+
+.formButton:hover {
+    background-color: hsl(243, 100%, 62%);
+}

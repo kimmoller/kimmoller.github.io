@@ -21,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: hsl(213, 96%, 18%);
+    background-color: var(--marine-blue);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -33,17 +33,17 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: hsl(231, 100%, 99%);
+    background-color: var(--white);
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .slider {
-    background-color: hsl(213, 96%, 18%);
+    background-color: var(--marine-blue);
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px hsl(231, 100%, 99%);
+    box-shadow: 0 0 1px var(--white);
   }
   
   input:checked + .slider:before {

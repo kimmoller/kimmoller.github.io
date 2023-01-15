@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     margin-top: 16px;
-    background-color: hsl(231, 100%, 99%);
+    background-color: var(--alabaster);
 }
 
 .singleButtonContainer {

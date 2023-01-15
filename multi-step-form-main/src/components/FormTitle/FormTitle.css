@@ -6,12 +6,12 @@
 }
 
 .mainText {
-    color:hsl(213, 96%, 18%);
+    color: var(--marine-blue);
     font-family: Ubuntu-medium;
     font-size: 36px;
     margin-bottom: 10px;
 }
 
 .secondaryText {
-    color: hsl(231, 11%, 63%);
+    color: var(--cool-gray);
 }

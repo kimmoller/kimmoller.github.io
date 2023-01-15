@@ -1,7 +1,7 @@
 .formInput {
     display: flex;
     flex-direction: column;
-    color: hsl(213, 96%, 18%);
+    color: var(--marine-blue);
     margin-bottom: 4%;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .error {
-    color: hsl(354, 84%, 57%);
+    color: var(--strawberry-red);
     font-family: Ubuntu-bold;
     display: none;
 }
@@ -20,11 +20,11 @@
 .input {
     height: 36px;
     border-radius: 5px;
-    border: 2px solid hsl(229, 24%, 87%);
+    border: 2px solid var(--light-gray);
     padding-left: 10px;
 }
 
 .input:focus {
-    border-color: hsl(243, 100%, 62%);
+    border-color: var(--purple-blue);
     outline: none;
 }

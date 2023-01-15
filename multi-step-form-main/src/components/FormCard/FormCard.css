@@ -1,7 +1,7 @@
 .formCard {
     display: flex;
     flex-direction: column;
-    border: 1px solid hsl(229, 24%, 87%);
+    border: 1px solid var(--light-gray);
     border-radius: 7px;
     width: 100%;
     cursor: pointer;
@@ -22,13 +22,13 @@
 }
 
 .cardName {
-    color: hsl(213, 96%, 18%);
+    color: var(--marine-blue);
     margin-bottom: 5px;
     font-family: Ubuntu-medium;
     font-size: 18px;
 }
 
 .cardPrice {
-    color: hsl(231, 11%, 63%);
+    color: var(--cool-gray);
     margin-bottom: 10px;
 }

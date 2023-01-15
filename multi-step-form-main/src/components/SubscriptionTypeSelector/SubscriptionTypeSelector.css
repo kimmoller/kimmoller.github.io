@@ -7,12 +7,12 @@
 }
 
 .lable {
-  color: hsl(231, 11%, 63%);
+  color: var(--cool-gray);
   font-family: Ubuntu-medium;
 }
 
 .lableSelected {
-  color: hsl(213, 96%, 18%);
+  color: var(--marine-blue);
   font-family: Ubuntu-medium;
 }
 

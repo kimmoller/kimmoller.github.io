@@ -9,26 +9,26 @@
 
 .primary {
     color: hsl(231, 100%, 99%);
-    background-color: hsl(213, 96%, 18%);
+    background-color: var(--marine-blue);
 }
 
 .primary:hover {
     color: hsl(231, 100%, 99%);
-    background-color: hsl(243, 100%, 62%);
+    background-color: var(--purple-blue);
 }
 
 .secondary {
     color: hsl(231, 100%, 99%);
-    background-color: hsl(243, 100%, 62%);
+    background-color: var(--purple-blue);
 }
 
 .secondary:hover {
-    background-color: hsl(228, 100%, 84%);
+    background-color: var(--pastel-blue);
 }
 
 .light {
-    color: hsl(231, 11%, 63%);
-    background-color: hsl(231, 100%, 99%);
+    color: var(--cool-gray);
+    background-color: var(--alabaster);
 }
 
 .light:hover {

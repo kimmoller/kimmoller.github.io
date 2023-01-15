@@ -22,7 +22,7 @@
 }
 
 .step {
-    color: hsl(231, 11%, 63%);
+    color: var(--cool-gray);
 }
 
 .topic {

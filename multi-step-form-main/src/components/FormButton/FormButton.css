@@ -1,14 +1,27 @@
 .formButton {
     width: 96px;
     height: 48px;
-    color: hsl(231, 100%, 99%);
-    background-color: hsl(213, 96%, 18%);
     border: none;
     cursor: pointer;
     border-radius: 7px;
     font-family: Ubuntu-medium;
 }
 
-.formButton:hover {
+.primary {
+    color: hsl(231, 100%, 99%);
+    background-color: hsl(213, 96%, 18%);
+}
+
+.primary:hover {
+    color: hsl(231, 100%, 99%);
     background-color: hsl(243, 100%, 62%);
+}
+
+.secondary {
+    color: hsl(231, 11%, 63%);
+    background-color: hsl(231, 100%, 99%);
+}
+
+.secondary:hover {
+    color: hsl(213, 96%, 18%);
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import "./FormCard.css";
 
 type Props = {
   image: string;
@@ -9,9 +10,11 @@ type Props = {
 const FormCard = (props: Props) => {
   return (
     <div className='formCard'>
-      <img src={props.image}></img>
-      <span className='formCardName'>{props.name}</span>
-      <span className='formCardPrice'>{props.price}</span>
+      <img className='cardImage' src={`./images/${props.image}`}></img>
+      <div className='textContainer'>
+        <span className='cardName'>{props.name}</span>
+        <span className='cardPrice'>{props.price}</span>
+      </div>
     </div>
   );
 };

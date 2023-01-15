@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FormInput.css";
 
 type Props = {
   title: string;
   placeholder: string;
+  required: boolean;
 };
 
 const FormInput = (props: Props) => {
+  const isFilled = useState(false);
+
   return (
     <div className='formInput'>
       <div className='titleContainer'>

@@ -6,9 +6,31 @@
     margin-right: 10%;
 }
 
-.buttonContainer {
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    height: 30%;
+}
+
+.selectorContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    background-color: hsl(231, 100%, 99%);
+}
+
+.singleButtonContainer {
     display: flex;
     justify-content: end;
+    margin-top: auto;
+    margin-bottom: 3%;
+}
+
+.multiButtonContainer {
+    display: flex;
+    justify-content: space-between;
     margin-top: auto;
     margin-bottom: 3%;
 }

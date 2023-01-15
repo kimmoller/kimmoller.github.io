@@ -1,0 +1,34 @@
+.formCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 7px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.cardImage {
+    width: 32px;
+    height: 32px;
+    margin-bottom: auto;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+
+.cardName {
+    color: hsl(213, 96%, 18%);
+    margin-bottom: 5px;
+    font-family: Ubuntu-medium;
+    font-size: 18px;
+}
+
+.cardPrice {
+    color: hsl(231, 11%, 63%);
+    margin-bottom: 10px;
+}

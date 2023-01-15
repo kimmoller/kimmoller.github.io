@@ -21,6 +21,11 @@
     background-color: var(--alabaster);
 }
 
+.selectBoxContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .singleButtonContainer {
     display: flex;
     justify-content: end;

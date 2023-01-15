@@ -5,6 +5,7 @@ import FormCard from "../FormCard/FormCard";
 import FormInput from "../FormInput/FormInput";
 import FormTitle from "../FormTitle/FormTitle";
 import NextButton from "../NextButton/NextButton";
+import SelectBox from "../SelectBox/SelectBox";
 import SubscriptionTypeSelector from "../SubscriptionTypeSelector/SubscriptionTypeSelector";
 import "./Form.css";
 
@@ -66,6 +67,15 @@ const ThirdStep = (props: StepProps) => {
   return (
     <div className='form'>
       <FormTitle mainText='Pick add-ons' secondaryText='Add-ons help you enhance your gaming experince.'></FormTitle>
+      <div className='selectBoxContainer'>
+        <SelectBox mainText='Online service' secondaryText='Access to multiplayer games' price='+$1/mo'></SelectBox>
+        <SelectBox mainText='Larger storage' secondaryText='Extra 1TB of cloud save' price='+$2/mo'></SelectBox>
+        <SelectBox
+          mainText='Customizable profile'
+          secondaryText='Custom theme on your profile'
+          price='+$2/mo'
+        ></SelectBox>
+      </div>
       <div className='multiButtonContainer'>
         <BackButton onClick={() => props.onClickGoBack()}></BackButton>
         <NextButton onClick={() => props.onClickNextStep()}></NextButton>

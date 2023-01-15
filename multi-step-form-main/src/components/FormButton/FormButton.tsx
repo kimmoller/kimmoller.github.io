@@ -4,7 +4,7 @@ import "./FormButton.css";
 type Props = {
   text: string;
   onClick: () => void;
-  variety: "primary" | "secondary";
+  variety: "primary" | "secondary" | "light";
 };
 
 const FormButton = (props: Props) => {

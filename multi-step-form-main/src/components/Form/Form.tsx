@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BackButton from "../BackButton/BackButton";
+import ConfirmButton from "../CofirmButton/ConfirmButton";
 import FormCard from "../FormCard/FormCard";
 import FormInput from "../FormInput/FormInput";
 import FormTitle from "../FormTitle/FormTitle";
@@ -16,12 +17,17 @@ type StepProps = {
   onClickGoBack: () => void;
 };
 
+type LastStepPropes = {
+  onConfirm: () => void;
+  onClickGoBack: () => void;
+};
+
 const FirstStep = (props: FirstStepProps) => {
   return (
     <div className='form'>
       <FormTitle
         mainText='Personal Info'
-        secondaryText='Please provide your name, email address, and phone number'
+        secondaryText='Please provide your name, email address, and phone number.'
       ></FormTitle>
       <FormInput title='Name' placeholder='eg. Firstname Lastname' required={true}></FormInput>
       <FormInput title='Email Address' placeholder='eg. firstname.lastname@example.net' required={true}></FormInput>
@@ -38,7 +44,7 @@ const SecondStep = (props: StepProps) => {
     <div className='form'>
       <FormTitle
         mainText='Select your plan'
-        secondaryText='You have the option of a monthly or yearly subscription'
+        secondaryText='You have the option of a monthly or yearly subscription.'
       ></FormTitle>
       <div className='cardContainer'>
         <FormCard image='icon-arcade.svg' name='Arcade' price='$9 / month'></FormCard>
@@ -56,16 +62,32 @@ const SecondStep = (props: StepProps) => {
   );
 };
 
-const ThirdStep = () => {
-  return <div>step 3</div>;
+const ThirdStep = (props: StepProps) => {
+  return (
+    <div className='form'>
+      <FormTitle mainText='Pick add-ons' secondaryText='Add-ons help you enhance your gaming experince.'></FormTitle>
+      <div className='multiButtonContainer'>
+        <BackButton onClick={() => props.onClickGoBack()}></BackButton>
+        <NextButton onClick={() => props.onClickNextStep()}></NextButton>
+      </div>
+    </div>
+  );
 };
 
-const LastStep = () => {
-  return <div>step 4</div>;
+const LastStep = (props: LastStepPropes) => {
+  return (
+    <div className='form'>
+      <FormTitle mainText='Finishing up' secondaryText='Double-check everythin looks OK before confirming.'></FormTitle>
+      <div className='multiButtonContainer'>
+        <BackButton onClick={() => props.onClickGoBack()}></BackButton>
+        <ConfirmButton onClick={() => props.onConfirm()}></ConfirmButton>
+      </div>
+    </div>
+  );
 };
 
 const Form = () => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const goToNextStep = () => {
     const nextStep = currentStep + 1;
@@ -83,8 +105,15 @@ const Form = () => {
       {currentStep === 2 ? (
         <SecondStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></SecondStep>
       ) : null}
-      {currentStep === 3 ? <ThirdStep></ThirdStep> : null}
-      {currentStep === 4 ? <LastStep></LastStep> : null}
+      {currentStep === 3 ? (
+        <ThirdStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ThirdStep>
+      ) : null}
+      {currentStep === 4 ? (
+        <LastStep
+          onConfirm={() => console.log("confirm clicked")}
+          onClickGoBack={() => returnToPreviousStep()}
+        ></LastStep>
+      ) : null}
     </>
   );
 };

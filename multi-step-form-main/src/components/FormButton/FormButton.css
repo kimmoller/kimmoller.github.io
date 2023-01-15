@@ -18,10 +18,19 @@
 }
 
 .secondary {
+    color: hsl(231, 100%, 99%);
+    background-color: hsl(243, 100%, 62%);
+}
+
+.secondary:hover {
+    background-color: hsl(228, 100%, 84%);
+}
+
+.light {
     color: hsl(231, 11%, 63%);
     background-color: hsl(231, 100%, 99%);
 }
 
-.secondary:hover {
+.light:hover {
     color: hsl(213, 96%, 18%);
 }

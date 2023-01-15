@@ -6,7 +6,7 @@ type Props = {
 };
 
 const BackButton = (props: Props) => {
-  return <FormButton text='Go Back' onClick={() => props.onClick()} variety='secondary'></FormButton>;
+  return <FormButton text='Go Back' onClick={() => props.onClick()} variety='light'></FormButton>;
 };
 
 export default BackButton;

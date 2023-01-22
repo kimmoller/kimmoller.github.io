@@ -1,9 +1,15 @@
-import { FC } from "react";
+import React from "react";
 import "./App.css";
-import Container from "./components/Container/Container";
+import Form from "./components/Form/Form";
+import SideBar from "./components/SideBar/SideBar";
 
-const App: FC = () => {
-  return <Container></Container>;
+const App = () => {
+  return (
+    <div className='app'>
+      <SideBar></SideBar>
+      <Form></Form>
+    </div>
+  );
 };
 
 export default App;

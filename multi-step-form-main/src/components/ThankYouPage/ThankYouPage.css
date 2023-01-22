@@ -3,11 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .thankYou .icon {
-    width: 30%;
-    height: 30%;
+    width: 15%;
+    height: 15%;
     margin-bottom: 36px;
 }
 
@@ -18,14 +19,9 @@
     margin-bottom: 16px;
 }
 
-.thankYou .text {
-    color: var(--cool-gray);
-    margin-right: 20%;
-    margin-left: 20%;
-    text-align: center;
-}
-
 .thankYou .content {
     color: var(--cool-gray);
-    /* width: 70%; */
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: center;
 }

@@ -1,0 +1,24 @@
+.balance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--soft-red);
+    border-radius: 18px;
+    padding: 32px;
+    height: 10%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    color: var(--very-pale-orange);
+}
+
+.total {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.logo {
+    display: flex;
+}

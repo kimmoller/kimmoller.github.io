@@ -1,3 +1,15 @@
+@font-face {
+  font-family: DM Sans;
+  src: url("./assets/fonts/DMSans-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: DM Sans;
+  src: url("./assets/fonts/DMSans-Bold.ttf");
+  font-weight: bold;
+}
+
 :root {
   --soft-red: hsl(10, 79%, 65%);
   --cyan: hsl(186, 34%, 60%);
@@ -8,10 +20,10 @@
   --very-pale-orange: hsl(33, 100%, 98%);
 
 
-  font-family: DM Sans, Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: DM Sans;
   font-size: 18px;
-  line-height: 24px;
   font-weight: 400;
+  /* line-height: 18px; */
 
   color: var(--dark-brown);
   background-color: var(--cream);

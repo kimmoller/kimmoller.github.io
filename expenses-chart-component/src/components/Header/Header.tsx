@@ -1,13 +1,13 @@
 import React from "react";
-import "./Balance.css";
+import "./Header.css";
 
 type Props = {
   total: string;
 };
 
-const Balance = (props: Props) => {
+const Header = (props: Props) => {
   return (
-    <div className='balance'>
+    <div className='header'>
       <div className='content'>
         <span className='title'>My Balance</span>
         <span className='total'>${props.total}</span>
@@ -19,4 +19,4 @@ const Balance = (props: Props) => {
   );
 };
 
-export default Balance;
+export default Header;

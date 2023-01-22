@@ -7,6 +7,7 @@ import FormTitle from "../FormTitle/FormTitle";
 import NextButton from "../NextButton/NextButton";
 import SelectBox from "../SelectBox/SelectBox";
 import SubscriptionTypeSelector from "../SubscriptionTypeSelector/SubscriptionTypeSelector";
+import ThankYouPage from "../ThankYouPage/ThankYouPage";
 import "./Form.css";
 
 type FirstStepProps = {
@@ -18,7 +19,7 @@ type StepProps = {
   onClickGoBack: () => void;
 };
 
-type LastStepPropes = {
+type ConfirmStepProps = {
   onConfirm: () => void;
   onClickGoBack: () => void;
 };
@@ -84,7 +85,7 @@ const ThirdStep = (props: StepProps) => {
   );
 };
 
-const LastStep = (props: LastStepPropes) => {
+const ConfirmStep = (props: ConfirmStepProps) => {
   return (
     <div className='form'>
       <FormTitle mainText='Finishing up' secondaryText='Double-check everythin looks OK before confirming.'></FormTitle>
@@ -92,6 +93,14 @@ const LastStep = (props: LastStepPropes) => {
         <BackButton onClick={() => props.onClickGoBack()}></BackButton>
         <ConfirmButton onClick={() => props.onConfirm()}></ConfirmButton>
       </div>
+    </div>
+  );
+};
+
+const LastStep = () => {
+  return (
+    <div className='form'>
+      <ThankYouPage></ThankYouPage>
     </div>
   );
 };
@@ -119,11 +128,9 @@ const Form = () => {
         <ThirdStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ThirdStep>
       ) : null}
       {currentStep === 4 ? (
-        <LastStep
-          onConfirm={() => console.log("confirm clicked")}
-          onClickGoBack={() => returnToPreviousStep()}
-        ></LastStep>
+        <ConfirmStep onConfirm={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ConfirmStep>
       ) : null}
+      {currentStep === 5 ? <LastStep></LastStep> : null}
     </>
   );
 };

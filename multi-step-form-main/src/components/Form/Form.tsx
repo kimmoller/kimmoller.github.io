@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useMemo, useReducer, useState } from "react";
 import BackButton from "../BackButton/BackButton";
 import ConfirmButton from "../CofirmButton/ConfirmButton";
 import FormCard from "../FormCard/FormCard";
@@ -24,16 +24,58 @@ type ConfirmStepProps = {
   onClickGoBack: () => void;
 };
 
+interface PersonalInfo {
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
+
+interface Item {
+  name: string;
+  price: string;
+}
+
+interface FormData {
+  personalInfo: PersonalInfo;
+  plan: Item;
+  addOns: Item[];
+}
+
+type FormContextType = {
+  data: FormData;
+  updateData: React.Dispatch<FormData>;
+};
+
 const FirstStep = (props: FirstStepProps) => {
+  const { data, updateData } = useContext(FormContext) as FormContextType;
+
   return (
     <div className='form'>
       <FormTitle
         mainText='Personal Info'
         secondaryText='Please provide your name, email address, and phone number.'
       ></FormTitle>
-      <FormInput title='Name' placeholder='eg. Firstname Lastname' required={true}></FormInput>
-      <FormInput title='Email Address' placeholder='eg. firstname.lastname@example.net' required={true}></FormInput>
-      <FormInput title='Phone number' placeholder='eg. +358401234567' required={true}></FormInput>
+      <FormInput
+        title='Name'
+        placeholder='eg. Firstname Lastname'
+        required={true}
+        value={data.personalInfo.name}
+        updateValue={(value) => updateData({ ...data, personalInfo: { ...data.personalInfo, name: value } })}
+      ></FormInput>
+      <FormInput
+        title='Email Address'
+        placeholder='eg. firstname.lastname@example.net'
+        required={true}
+        value={data.personalInfo.email}
+        updateValue={(value) => updateData({ ...data, personalInfo: { ...data.personalInfo, email: value } })}
+      ></FormInput>
+      <FormInput
+        title='Phone number'
+        placeholder='eg. +358401234567'
+        required={true}
+        value={data.personalInfo.phoneNumber}
+        updateValue={(value) => updateData({ ...data, personalInfo: { ...data.personalInfo, phoneNumber: value } })}
+      ></FormInput>
       <div className='singleButtonContainer'>
         <NextButton onClick={() => props.onClickNextStep()}></NextButton>
       </div>
@@ -105,10 +147,23 @@ const LastStep = () => {
   );
 };
 
+export const FormContext = React.createContext<FormContextType | null>(null);
+
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [data, updateData] = useReducer(
+    (prev: FormData, next: FormData) => {
+      return { ...prev, ...next };
+    },
+    { personalInfo: { name: "", email: "", phoneNumber: "" }, plan: { name: "", price: "" }, addOns: [] }
+  );
+
+  const contextValue = useMemo(() => {
+    return { data, updateData };
+  }, [data, updateData]);
 
   const goToNextStep = () => {
+    console.log(data);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -120,17 +175,19 @@ const Form = () => {
 
   return (
     <>
-      {currentStep === 1 ? <FirstStep onClickNextStep={() => goToNextStep()}></FirstStep> : null}
-      {currentStep === 2 ? (
-        <SecondStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></SecondStep>
-      ) : null}
-      {currentStep === 3 ? (
-        <ThirdStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ThirdStep>
-      ) : null}
-      {currentStep === 4 ? (
-        <ConfirmStep onConfirm={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ConfirmStep>
-      ) : null}
-      {currentStep === 5 ? <LastStep></LastStep> : null}
+      <FormContext.Provider value={contextValue}>
+        {currentStep === 1 ? <FirstStep onClickNextStep={() => goToNextStep()}></FirstStep> : null}
+        {currentStep === 2 ? (
+          <SecondStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></SecondStep>
+        ) : null}
+        {currentStep === 3 ? (
+          <ThirdStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ThirdStep>
+        ) : null}
+        {currentStep === 4 ? (
+          <ConfirmStep onConfirm={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ConfirmStep>
+        ) : null}
+        {currentStep === 5 ? <LastStep></LastStep> : null}
+      </FormContext.Provider>
     </>
   );
 };

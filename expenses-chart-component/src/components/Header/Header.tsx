@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import styles from "./header.module.css";
 
 type Props = {
   total: string;
@@ -7,12 +7,12 @@ type Props = {
 
 const Header = (props: Props) => {
   return (
-    <div className='header'>
-      <div className='content'>
-        <span className='title'>My Balance</span>
-        <span className='total'>${props.total}</span>
+    <div className={styles.header}>
+      <div className={styles.content}>
+        <span className={styles.title}>My Balance</span>
+        <span className={styles.total}>${props.total}</span>
       </div>
-      <div className='logo'>
+      <div className={styles.logo}>
         <img src='/logo.svg'></img>
       </div>
     </div>

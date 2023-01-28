@@ -1,11 +1,10 @@
 .header {
     display: flex;
-    flex-direction: row;
+    flex-basis: 10%;
     justify-content: space-between;
     background-color: var(--soft-red);
     border-radius: 18px;
     padding: 32px;
-    height: 10%;
 }
 
 .content {

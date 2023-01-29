@@ -1,0 +1,13 @@
+.addon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title {
+    color: var(--cool-gray);
+}
+
+.price {
+    color: var(--marine-blue);
+}

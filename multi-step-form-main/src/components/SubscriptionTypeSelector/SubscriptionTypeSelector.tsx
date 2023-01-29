@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { PlanPricing, PlanPricingContext, PlanPricingContextType } from "../Form/Form";
 import Switch from "../Switch/Switch";
 import "./SubscriptionTypeSelector.css";
 
@@ -6,17 +7,17 @@ const LABLE_SELECTED = "lableSelected";
 const LABLE = "lable";
 
 const SubscriptionTypeSelector = () => {
-  const [isSelected, setIsSelected] = useState("monthly");
+  const { pricing, setPricing } = useContext(PlanPricingContext) as PlanPricingContextType;
 
   const onToggleChange = () => {
-    if (isSelected === "monthly") {
+    if (pricing === PlanPricing.MONTH) {
       setElementAsSelected(document.getElementById("yearly"));
       setElementNotSelected(document.getElementById("monthly"));
-      setIsSelected("yearly");
+      setPricing(PlanPricing.YEAR);
     } else {
       setElementAsSelected(document.getElementById("monthly"));
       setElementNotSelected(document.getElementById("yearly"));
-      setIsSelected("monthly");
+      setPricing(PlanPricing.MONTH);
     }
   };
 

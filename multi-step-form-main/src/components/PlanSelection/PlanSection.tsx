@@ -1,6 +1,13 @@
 import React, { useContext } from "react";
 import BackButton from "../BackButton/BackButton";
-import { FormContext, FormContextType, FormDataActionType } from "../Form/Form";
+import {
+  FormContext,
+  FormContextType,
+  FormDataActionType,
+  PlanPricing,
+  PlanPricingContext,
+  PlanPricingContextType,
+} from "../Form/Form";
 import FormCard from "../FormCard/FormCard";
 import FormTitle from "../FormTitle/FormTitle";
 import NextButton from "../NextButton/NextButton";
@@ -13,6 +20,7 @@ type Props = {
 
 const PlanSection = (props: Props) => {
   const { data, updateData } = useContext(FormContext) as FormContextType;
+  const { pricing, setPricing } = useContext(PlanPricingContext) as PlanPricingContextType;
 
   return (
     <div className='form'>
@@ -25,7 +33,8 @@ const PlanSection = (props: Props) => {
           id='Arcade'
           image='icon-arcade.svg'
           name='Arcade'
-          price='$9 / month'
+          price={pricing === PlanPricing.MONTH ? 9 : 90}
+          pricing={pricing}
           selectPlan={(name, price) =>
             updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
           }
@@ -34,7 +43,8 @@ const PlanSection = (props: Props) => {
           id='Advanced'
           image='icon-advanced.svg'
           name='Advanced'
-          price='$12 / month'
+          price={pricing === PlanPricing.MONTH ? 12 : 120}
+          pricing={pricing}
           selectPlan={(name, price) =>
             updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
           }
@@ -43,7 +53,8 @@ const PlanSection = (props: Props) => {
           id='Pro'
           image='icon-pro.svg'
           name='Pro'
-          price='$15 / month'
+          price={pricing === PlanPricing.MONTH ? 15 : 150}
+          pricing={pricing}
           selectPlan={(name, price) =>
             updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
           }

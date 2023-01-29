@@ -1,12 +1,15 @@
 import React from "react";
+import { getPricingLabel } from "../../Pricing";
+import { PlanPricing } from "../Form/Form";
 import "./SelectBox.css";
 
 type Props = {
   mainText: string;
   secondaryText: string;
-  price: string;
+  price: number;
+  pricing: PlanPricing;
   selected: boolean;
-  onSelect: (name: string, price: string) => void;
+  onSelect: (name: string, price: number) => void;
   onDeselect: (name: string) => void;
 };
 
@@ -25,7 +28,7 @@ const SelectBox = (props: Props) => {
         <span className='mainText'>{props.mainText}</span>
         <span className='secondaryText'>{props.secondaryText}</span>
       </div>
-      <span className='price'>{props.price}</span>
+      <span className='price'>{`$${props.price} / ${getPricingLabel(props.pricing)}`}</span>
     </div>
   );
 };

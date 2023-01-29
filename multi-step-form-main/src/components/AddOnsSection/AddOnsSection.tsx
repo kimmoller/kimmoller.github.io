@@ -1,6 +1,13 @@
 import React, { useContext } from "react";
 import BackButton from "../BackButton/BackButton";
-import { FormContext, FormContextType, FormDataActionType } from "../Form/Form";
+import {
+  FormContext,
+  FormContextType,
+  FormDataActionType,
+  PlanPricing,
+  PlanPricingContext,
+  PlanPricingContextType,
+} from "../Form/Form";
 import FormTitle from "../FormTitle/FormTitle";
 import NextButton from "../NextButton/NextButton";
 import SelectBox from "../SelectBox/SelectBox";
@@ -12,6 +19,7 @@ type Props = {
 
 const AddOnsSection = (props: Props) => {
   const { data, updateData } = useContext(FormContext) as FormContextType;
+  const { pricing, setPricing } = useContext(PlanPricingContext) as PlanPricingContextType;
 
   return (
     <div className='form'>
@@ -20,7 +28,8 @@ const AddOnsSection = (props: Props) => {
         <SelectBox
           mainText='Online service'
           secondaryText='Access to multiplayer games'
-          price='+$1/mo'
+          price={pricing === PlanPricing.MONTH ? 1 : 10}
+          pricing={pricing}
           onSelect={(name, price) =>
             updateData({
               type: FormDataActionType.ADD,
@@ -33,7 +42,8 @@ const AddOnsSection = (props: Props) => {
         <SelectBox
           mainText='Larger storage'
           secondaryText='Extra 1TB of cloud save'
-          price='+$2/mo'
+          price={pricing === PlanPricing.MONTH ? 2 : 20}
+          pricing={pricing}
           onSelect={(name, price) =>
             updateData({
               type: FormDataActionType.ADD,
@@ -46,7 +56,8 @@ const AddOnsSection = (props: Props) => {
         <SelectBox
           mainText='Customizable profile'
           secondaryText='Custom theme on your profile'
-          price='+$2/mo'
+          price={pricing === PlanPricing.MONTH ? 2 : 20}
+          pricing={pricing}
           onSelect={(name, price) =>
             updateData({
               type: FormDataActionType.ADD,

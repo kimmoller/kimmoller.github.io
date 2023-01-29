@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useReducer, useState } from "react";
+import React, { SetStateAction, useMemo, useReducer, useState } from "react";
 import AddOnsSection from "../AddOnsSection/AddOnsSection";
 import ConfirmSection from "../ConfimSection/ConfirmSection";
 import PersonalInfoSection from "../PersonalInfoSection/PersonalInfoSection";
@@ -11,6 +11,11 @@ export enum FormDataActionType {
   REMOVE = "REMOVE",
 }
 
+export enum PlanPricing {
+  MONTH = "MONTH",
+  YEAR = "YEAR",
+}
+
 interface PersonalInfo {
   name: string;
   email: string;
@@ -19,7 +24,7 @@ interface PersonalInfo {
 
 interface Item {
   name: string;
-  price: string;
+  price: number;
 }
 
 interface FormData {
@@ -39,10 +44,18 @@ export type FormContextType = {
   updateData: React.Dispatch<FormDataAction>;
 };
 
+export type PlanPricingContextType = {
+  pricing: PlanPricing;
+  setPricing: React.Dispatch<SetStateAction<PlanPricing>>;
+};
+
 export const FormContext = React.createContext<FormContextType | null>(null);
+export const PlanPricingContext = React.createContext<PlanPricingContextType | null>(null);
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [pricing, setPricing] = useState(PlanPricing.MONTH);
+
   const [data, updateData] = useReducer(
     (state: FormData, action: FormDataAction) => {
       switch (action.type) {
@@ -54,15 +67,18 @@ const Form = () => {
           return { ...state, ...action.data };
       }
     },
-    { personalInfo: { name: "", email: "", phoneNumber: "" }, plan: { name: "", price: "" }, addOns: [] }
+    { personalInfo: { name: "", email: "", phoneNumber: "" }, plan: { name: "", price: 0 }, addOns: [] }
   );
 
   const contextValue = useMemo(() => {
     return { data, updateData };
   }, [data, updateData]);
 
+  const planContextValue = useMemo(() => {
+    return { pricing, setPricing };
+  }, [pricing, setPricing]);
+
   const goToNextStep = () => {
-    console.log(data);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
   };
@@ -74,28 +90,32 @@ const Form = () => {
 
   return (
     <>
-      <FormContext.Provider value={contextValue}>
-        {currentStep === 1 ? <PersonalInfoSection onClickNextStep={() => goToNextStep()}></PersonalInfoSection> : null}
-        {currentStep === 2 ? (
-          <PlanSection
-            onClickNextStep={() => goToNextStep()}
-            onClickGoBack={() => returnToPreviousStep()}
-          ></PlanSection>
-        ) : null}
-        {currentStep === 3 ? (
-          <AddOnsSection
-            onClickNextStep={() => goToNextStep()}
-            onClickGoBack={() => returnToPreviousStep()}
-          ></AddOnsSection>
-        ) : null}
-        {currentStep === 4 ? (
-          <ConfirmSection
-            onConfirm={() => goToNextStep()}
-            onClickGoBack={() => returnToPreviousStep()}
-          ></ConfirmSection>
-        ) : null}
-        {currentStep === 5 ? <ThankYouPage /> : null}
-      </FormContext.Provider>
+      <PlanPricingContext.Provider value={planContextValue}>
+        <FormContext.Provider value={contextValue}>
+          {currentStep === 1 ? (
+            <PersonalInfoSection onClickNextStep={() => goToNextStep()}></PersonalInfoSection>
+          ) : null}
+          {currentStep === 2 ? (
+            <PlanSection
+              onClickNextStep={() => goToNextStep()}
+              onClickGoBack={() => returnToPreviousStep()}
+            ></PlanSection>
+          ) : null}
+          {currentStep === 3 ? (
+            <AddOnsSection
+              onClickNextStep={() => goToNextStep()}
+              onClickGoBack={() => returnToPreviousStep()}
+            ></AddOnsSection>
+          ) : null}
+          {currentStep === 4 ? (
+            <ConfirmSection
+              onConfirm={() => goToNextStep()}
+              onClickGoBack={() => returnToPreviousStep()}
+            ></ConfirmSection>
+          ) : null}
+          {currentStep === 5 ? <ThankYouPage /> : null}
+        </FormContext.Provider>
+      </PlanPricingContext.Provider>
     </>
   );
 };

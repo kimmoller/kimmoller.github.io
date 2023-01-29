@@ -1,12 +1,15 @@
 import React from "react";
+import { getPricingLabel } from "../../Pricing";
+import { PlanPricing } from "../Form/Form";
 import "./FormCard.css";
 
 type Props = {
   id: string;
   image: string;
   name: string;
-  price: string;
-  selectPlan: (name: string, price: string) => void;
+  price: number;
+  pricing: PlanPricing;
+  selectPlan: (name: string, price: number) => void;
 };
 
 const FormCard = (props: Props) => {
@@ -36,7 +39,7 @@ const FormCard = (props: Props) => {
         <img className='cardImage' src={`./images/${props.image}`}></img>
         <div className='textContainer'>
           <span className='cardName'>{props.name}</span>
-          <span className='cardPrice'>{props.price}</span>
+          <span className='cardPrice'>{`$${props.price} / ${getPricingLabel(props.pricing)}`}</span>
         </div>
       </label>
     </div>

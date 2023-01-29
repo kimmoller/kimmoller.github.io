@@ -21,6 +21,10 @@
     text-decoration: underline;
 }
 
+.change:hover {
+    color: var(--purple-blue);
+}
+
 .price {
     color: var(--marine-blue);
     font-family: Ubuntu-bold;

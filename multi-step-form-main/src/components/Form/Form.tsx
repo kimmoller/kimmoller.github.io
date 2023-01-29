@@ -1,4 +1,5 @@
-import React, { SetStateAction, useMemo, useReducer, useState } from "react";
+import React, { SetStateAction, useContext, useMemo, useReducer, useState } from "react";
+import { StepContext, StepContextType } from "../../App";
 import AddOnsSection from "../AddOnsSection/AddOnsSection";
 import ConfirmSection from "../ConfimSection/ConfirmSection";
 import PersonalInfoSection from "../PersonalInfoSection/PersonalInfoSection";
@@ -52,13 +53,9 @@ export type PlanPricingContextType = {
 export const FormContext = React.createContext<FormContextType | null>(null);
 export const PlanPricingContext = React.createContext<PlanPricingContextType | null>(null);
 
-type Props = {
-  currentStep: number;
-  setCurrentStep: (step: number) => void;
-};
-
-const Form = (props: Props) => {
+const Form = () => {
   const [pricing, setPricing] = useState(PlanPricing.MONTH);
+  const { currentStep, setCurrentStep } = useContext(StepContext) as StepContextType;
 
   const [data, updateData] = useReducer(
     (state: FormData, action: FormDataAction) => {
@@ -83,41 +80,41 @@ const Form = (props: Props) => {
   }, [pricing, setPricing]);
 
   const goToNextStep = () => {
-    const nextStep = props.currentStep + 1;
-    props.setCurrentStep(nextStep);
+    const nextStep = currentStep + 1;
+    setCurrentStep(nextStep);
   };
 
   const returnToPreviousStep = () => {
-    const nextStep = props.currentStep - 1;
-    props.setCurrentStep(nextStep);
+    const nextStep = currentStep - 1;
+    setCurrentStep(nextStep);
   };
 
   return (
     <>
       <PlanPricingContext.Provider value={planContextValue}>
         <FormContext.Provider value={contextValue}>
-          {props.currentStep === 1 ? (
+          {currentStep === 1 ? (
             <PersonalInfoSection onClickNextStep={() => goToNextStep()}></PersonalInfoSection>
           ) : null}
-          {props.currentStep === 2 ? (
+          {currentStep === 2 ? (
             <PlanSection
               onClickNextStep={() => goToNextStep()}
               onClickGoBack={() => returnToPreviousStep()}
             ></PlanSection>
           ) : null}
-          {props.currentStep === 3 ? (
+          {currentStep === 3 ? (
             <AddOnsSection
               onClickNextStep={() => goToNextStep()}
               onClickGoBack={() => returnToPreviousStep()}
             ></AddOnsSection>
           ) : null}
-          {props.currentStep === 4 ? (
+          {currentStep === 4 ? (
             <ConfirmSection
               onConfirm={() => goToNextStep()}
               onClickGoBack={() => returnToPreviousStep()}
             ></ConfirmSection>
           ) : null}
-          {props.currentStep === 5 ? <ThankYouPage /> : null}
+          {currentStep === 5 ? <ThankYouPage /> : null}
         </FormContext.Provider>
       </PlanPricingContext.Provider>
     </>

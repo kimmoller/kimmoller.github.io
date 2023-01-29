@@ -1,0 +1,16 @@
+.totalPriceContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+.title {
+    color: var(--cool-gray);
+}
+
+.price {
+    color: var(--purple-blue);
+    font-family: Ubuntu-bold;
+    font-size: 20px;
+}

@@ -14,8 +14,8 @@ type Props = {
 };
 
 const FormCard = (props: Props) => {
-  const onEnterPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+  const onKeyUp = (e: React.KeyboardEvent) => {
+    if (e.code === "Enter" || e.code === "Space") {
       (document.getElementById(props.id) as HTMLInputElement).checked = true;
       props.selectPlan(props.name, props.price);
     }
@@ -34,7 +34,7 @@ const FormCard = (props: Props) => {
         className='formCardLabel'
         onClick={() => props.selectPlan(props.name, props.price)}
         htmlFor={props.id}
-        onKeyUp={(e) => onEnterPress(e)}
+        onKeyUp={(e) => onKeyUp(e)}
         tabIndex={1}
         role='Plan selector'
       >

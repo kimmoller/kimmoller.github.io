@@ -9,6 +9,7 @@ type Props = {
   name: string;
   price: number;
   pricing: PlanPricing;
+  isChecked: (name: string) => boolean;
   selectPlan: (name: string, price: number) => void;
 };
 
@@ -26,6 +27,7 @@ const FormCard = (props: Props) => {
         id={props.id}
         value={props.name}
         name='planSelection'
+        checked={props.isChecked(props.name)}
         onChange={() => props.selectPlan(props.name, props.price)}
       ></input>
       <label

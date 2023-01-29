@@ -22,6 +22,14 @@ const PlanSection = (props: Props) => {
   const { data, updateData } = useContext(FormContext) as FormContextType;
   const { pricing, setPricing } = useContext(PlanPricingContext) as PlanPricingContextType;
 
+  const onSelectPlan = (name: string, price: number) => {
+    updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } });
+  };
+
+  const isChecked = (name: string) => {
+    return data.plan.name === name;
+  };
+
   return (
     <div className='form'>
       <FormTitle
@@ -35,9 +43,8 @@ const PlanSection = (props: Props) => {
           name='Arcade'
           price={pricing === PlanPricing.MONTH ? 9 : 90}
           pricing={pricing}
-          selectPlan={(name, price) =>
-            updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
-          }
+          isChecked={(name) => isChecked(name)}
+          selectPlan={(name, price) => onSelectPlan(name, price)}
         ></FormCard>
         <FormCard
           id='Advanced'
@@ -45,9 +52,8 @@ const PlanSection = (props: Props) => {
           name='Advanced'
           price={pricing === PlanPricing.MONTH ? 12 : 120}
           pricing={pricing}
-          selectPlan={(name, price) =>
-            updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
-          }
+          isChecked={(name) => isChecked(name)}
+          selectPlan={(name, price) => onSelectPlan(name, price)}
         ></FormCard>
         <FormCard
           id='Pro'
@@ -55,9 +61,8 @@ const PlanSection = (props: Props) => {
           name='Pro'
           price={pricing === PlanPricing.MONTH ? 15 : 150}
           pricing={pricing}
-          selectPlan={(name, price) =>
-            updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
-          }
+          isChecked={(name) => isChecked(name)}
+          selectPlan={(name, price) => onSelectPlan(name, price)}
         ></FormCard>
       </div>
       <div className='selectorContainer'>

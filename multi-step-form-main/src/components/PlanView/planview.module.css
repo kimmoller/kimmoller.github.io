@@ -1,0 +1,31 @@
+.planContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    color: var(--marine-blue);
+    font-family: Ubuntu-bold;
+}
+
+.change {
+    color: var(--cool-gray);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.change:hover {
+    color: var(--purple-blue);
+}
+
+.price {
+    color: var(--marine-blue);
+    font-family: Ubuntu-bold;
+}

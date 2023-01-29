@@ -1,0 +1,17 @@
+.formTitle {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+    margin-bottom: 5%;
+}
+
+.formTitle .mainText {
+    color: var(--marine-blue);
+    font-family: Ubuntu-medium;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.formTitle .secondaryText {
+    color: var(--cool-gray);
+}

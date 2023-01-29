@@ -1,0 +1,36 @@
+.formButton {
+    width: 96px;
+    height: 48px;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+    font-family: Ubuntu-medium;
+}
+
+.primary {
+    color: hsl(231, 100%, 99%);
+    background-color: var(--marine-blue);
+}
+
+.primary:hover {
+    color: hsl(231, 100%, 99%);
+    background-color: var(--purple-blue);
+}
+
+.secondary {
+    color: hsl(231, 100%, 99%);
+    background-color: var(--purple-blue);
+}
+
+.secondary:hover {
+    background-color: var(--pastel-blue);
+}
+
+.light {
+    color: var(--cool-gray);
+    background-color: var(--alabaster);
+}
+
+.light:hover {
+    color: hsl(213, 96%, 18%);
+}

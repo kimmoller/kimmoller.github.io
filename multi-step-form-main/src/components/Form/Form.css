@@ -1,0 +1,41 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    margin-right: 10%;
+    flex-basis: 66%;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    height: 30%;
+}
+
+.selectorContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    background-color: var(--alabaster);
+}
+
+.selectBoxContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.singleButtonContainer {
+    display: flex;
+    justify-content: end;
+    margin-top: auto;
+    margin-bottom: 3%;
+}
+
+.multiButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    margin-bottom: 3%;
+}

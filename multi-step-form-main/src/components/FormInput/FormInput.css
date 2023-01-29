@@ -1,0 +1,30 @@
+.formInput {
+    display: flex;
+    flex-direction: column;
+    color: var(--marine-blue);
+    margin-bottom: 4%;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+
+.error {
+    color: var(--strawberry-red);
+    font-family: Ubuntu-bold;
+    display: none;
+}
+
+.input {
+    height: 36px;
+    border-radius: 5px;
+    border: 2px solid var(--light-gray);
+    padding-left: 10px;
+}
+
+.input:focus {
+    border-color: var(--purple-blue);
+    outline: none;
+}

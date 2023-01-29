@@ -1,0 +1,41 @@
+.selectBox {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--purple-blue);
+    border-radius: 7px;
+    padding: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.selectBox .checkbox {
+    margin-right: 32px;
+    height: 20px;
+    width: 20px;
+}
+
+.selectBox .checkbox:active {
+    background-color: var(--marine-blue);
+}
+
+.selectBox .description {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectBox .mainText {
+    color: var(--marine-blue);
+    font-family: Ubuntu-medium;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.selectBox .secondaryText {
+    color: var(--cool-gray);
+}
+
+.selectBox .price {
+    color: var(--purple-blue);
+    margin-right: 16px;
+    margin-left: auto;
+}

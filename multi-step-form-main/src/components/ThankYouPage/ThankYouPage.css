@@ -1,0 +1,27 @@
+.thankYou {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.thankYou .icon {
+    width: 15%;
+    height: 15%;
+    margin-bottom: 36px;
+}
+
+.thankYou .header {
+    font-size: 48px;
+    font-family: Ubuntu-bold;
+    color: var(--marine-blue);
+    margin-bottom: 16px;
+}
+
+.thankYou .content {
+    color: var(--cool-gray);
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: center;
+}

@@ -1,0 +1,22 @@
+.typeSelector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  padding: 10px;
+}
+
+.lable {
+  color: var(--cool-gray);
+  font-family: Ubuntu-medium;
+}
+
+.lableSelected {
+  color: var(--marine-blue);
+  font-family: Ubuntu-medium;
+}
+
+.switch {
+  margin-left: 32px;
+  margin-right: 32px;
+}

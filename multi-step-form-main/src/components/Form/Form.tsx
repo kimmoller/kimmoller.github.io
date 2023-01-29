@@ -1,30 +1,12 @@
 import React, { useContext, useMemo, useReducer, useState } from "react";
-import BackButton from "../BackButton/BackButton";
-import ConfirmButton from "../CofirmButton/ConfirmButton";
-import FormCard from "../FormCard/FormCard";
-import FormInput from "../FormInput/FormInput";
-import FormTitle from "../FormTitle/FormTitle";
-import NextButton from "../NextButton/NextButton";
-import SelectBox from "../SelectBox/SelectBox";
-import SubscriptionTypeSelector from "../SubscriptionTypeSelector/SubscriptionTypeSelector";
+import AddOnsSection from "../AddOnsSection/AddOnsSection";
+import ConfirmSection from "../ConfimSection/ConfirmSection";
+import PersonalInfoSection from "../PersonalInfoSection/PersonalInfoSection";
+import PlanSection from "../PlanSelection/PlanSection";
 import ThankYouPage from "../ThankYouPage/ThankYouPage";
 import "./Form.css";
 
-type FirstStepProps = {
-  onClickNextStep: () => void;
-};
-
-type StepProps = {
-  onClickNextStep: () => void;
-  onClickGoBack: () => void;
-};
-
-type ConfirmStepProps = {
-  onConfirm: () => void;
-  onClickGoBack: () => void;
-};
-
-enum FormDataActionType {
+export enum FormDataActionType {
   ADD = "ADD",
   REMOVE = "REMOVE",
 }
@@ -52,185 +34,9 @@ interface FormDataAction {
   data: FormData;
 }
 
-type FormContextType = {
+export type FormContextType = {
   data: FormData;
   updateData: React.Dispatch<FormDataAction>;
-};
-
-const FirstStep = (props: FirstStepProps) => {
-  const { data, updateData } = useContext(FormContext) as FormContextType;
-
-  return (
-    <div className='form'>
-      <FormTitle
-        mainText='Personal Info'
-        secondaryText='Please provide your name, email address, and phone number.'
-      ></FormTitle>
-      <FormInput
-        title='Name'
-        placeholder='eg. Firstname Lastname'
-        required={true}
-        value={data.personalInfo.name}
-        updateValue={(value) =>
-          updateData({
-            type: FormDataActionType.ADD,
-            data: { ...data, personalInfo: { ...data.personalInfo, name: value } },
-          })
-        }
-      ></FormInput>
-      <FormInput
-        title='Email Address'
-        placeholder='eg. firstname.lastname@example.net'
-        required={true}
-        value={data.personalInfo.email}
-        updateValue={(value) =>
-          updateData({
-            type: FormDataActionType.ADD,
-            data: { ...data, personalInfo: { ...data.personalInfo, email: value } },
-          })
-        }
-      ></FormInput>
-      <FormInput
-        title='Phone number'
-        placeholder='eg. +358401234567'
-        required={true}
-        value={data.personalInfo.phoneNumber}
-        updateValue={(value) =>
-          updateData({
-            type: FormDataActionType.ADD,
-            data: { ...data, personalInfo: { ...data.personalInfo, phoneNumber: value } },
-          })
-        }
-      ></FormInput>
-      <div className='singleButtonContainer'>
-        <NextButton onClick={() => props.onClickNextStep()}></NextButton>
-      </div>
-    </div>
-  );
-};
-
-const SecondStep = (props: StepProps) => {
-  const { data, updateData } = useContext(FormContext) as FormContextType;
-
-  return (
-    <div className='form'>
-      <FormTitle
-        mainText='Select your plan'
-        secondaryText='You have the option of a monthly or yearly subscription.'
-      ></FormTitle>
-      <div className='cardContainer'>
-        <FormCard
-          id='Arcade'
-          image='icon-arcade.svg'
-          name='Arcade'
-          price='$9 / month'
-          selectPlan={(name, price) =>
-            updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
-          }
-        ></FormCard>
-        <FormCard
-          id='Advanced'
-          image='icon-advanced.svg'
-          name='Advanced'
-          price='$12 / month'
-          selectPlan={(name, price) =>
-            updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
-          }
-        ></FormCard>
-        <FormCard
-          id='Pro'
-          image='icon-pro.svg'
-          name='Pro'
-          price='$15 / month'
-          selectPlan={(name, price) =>
-            updateData({ type: FormDataActionType.ADD, data: { ...data, plan: { name: name, price: price } } })
-          }
-        ></FormCard>
-      </div>
-      <div className='selectorContainer'>
-        <SubscriptionTypeSelector></SubscriptionTypeSelector>
-      </div>
-      <div className='multiButtonContainer'>
-        <BackButton onClick={() => props.onClickGoBack()}></BackButton>
-        <NextButton onClick={() => props.onClickNextStep()}></NextButton>
-      </div>
-    </div>
-  );
-};
-
-const ThirdStep = (props: StepProps) => {
-  const { data, updateData } = useContext(FormContext) as FormContextType;
-
-  return (
-    <div className='form'>
-      <FormTitle mainText='Pick add-ons' secondaryText='Add-ons help you enhance your gaming experince.'></FormTitle>
-      <div className='selectBoxContainer'>
-        <SelectBox
-          mainText='Online service'
-          secondaryText='Access to multiplayer games'
-          price='+$1/mo'
-          onSelect={(name, price) =>
-            updateData({
-              type: FormDataActionType.ADD,
-              data: { ...data, addOns: [...data.addOns, { name: name, price: price }] },
-            })
-          }
-          onDeselect={(name) => updateData({ type: FormDataActionType.REMOVE, id: name, data: { ...data } })}
-          selected={data.addOns.filter((item) => item.name === "Online service").length > 0}
-        ></SelectBox>
-        <SelectBox
-          mainText='Larger storage'
-          secondaryText='Extra 1TB of cloud save'
-          price='+$2/mo'
-          onSelect={(name, price) =>
-            updateData({
-              type: FormDataActionType.ADD,
-              data: { ...data, addOns: [...data.addOns, { name: name, price: price }] },
-            })
-          }
-          onDeselect={(name) => updateData({ type: FormDataActionType.REMOVE, id: name, data: { ...data } })}
-          selected={data.addOns.filter((item) => item.name === "Larger storage").length > 0}
-        ></SelectBox>
-        <SelectBox
-          mainText='Customizable profile'
-          secondaryText='Custom theme on your profile'
-          price='+$2/mo'
-          onSelect={(name, price) =>
-            updateData({
-              type: FormDataActionType.ADD,
-              data: { ...data, addOns: [...data.addOns, { name: name, price: price }] },
-            })
-          }
-          onDeselect={(name) => updateData({ type: FormDataActionType.REMOVE, id: name, data: { ...data } })}
-          selected={data.addOns.filter((item) => item.name === "Customizable profile").length > 0}
-        ></SelectBox>
-      </div>
-      <div className='multiButtonContainer'>
-        <BackButton onClick={() => props.onClickGoBack()}></BackButton>
-        <NextButton onClick={() => props.onClickNextStep()}></NextButton>
-      </div>
-    </div>
-  );
-};
-
-const ConfirmStep = (props: ConfirmStepProps) => {
-  return (
-    <div className='form'>
-      <FormTitle mainText='Finishing up' secondaryText='Double-check everythin looks OK before confirming.'></FormTitle>
-      <div className='multiButtonContainer'>
-        <BackButton onClick={() => props.onClickGoBack()}></BackButton>
-        <ConfirmButton onClick={() => props.onConfirm()}></ConfirmButton>
-      </div>
-    </div>
-  );
-};
-
-const LastStep = () => {
-  return (
-    <div className='form'>
-      <ThankYouPage></ThankYouPage>
-    </div>
-  );
 };
 
 export const FormContext = React.createContext<FormContextType | null>(null);
@@ -269,17 +75,26 @@ const Form = () => {
   return (
     <>
       <FormContext.Provider value={contextValue}>
-        {currentStep === 1 ? <FirstStep onClickNextStep={() => goToNextStep()}></FirstStep> : null}
+        {currentStep === 1 ? <PersonalInfoSection onClickNextStep={() => goToNextStep()}></PersonalInfoSection> : null}
         {currentStep === 2 ? (
-          <SecondStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></SecondStep>
+          <PlanSection
+            onClickNextStep={() => goToNextStep()}
+            onClickGoBack={() => returnToPreviousStep()}
+          ></PlanSection>
         ) : null}
         {currentStep === 3 ? (
-          <ThirdStep onClickNextStep={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ThirdStep>
+          <AddOnsSection
+            onClickNextStep={() => goToNextStep()}
+            onClickGoBack={() => returnToPreviousStep()}
+          ></AddOnsSection>
         ) : null}
         {currentStep === 4 ? (
-          <ConfirmStep onConfirm={() => goToNextStep()} onClickGoBack={() => returnToPreviousStep()}></ConfirmStep>
+          <ConfirmSection
+            onConfirm={() => goToNextStep()}
+            onClickGoBack={() => returnToPreviousStep()}
+          ></ConfirmSection>
         ) : null}
-        {currentStep === 5 ? <LastStep></LastStep> : null}
+        {currentStep === 5 ? <ThankYouPage /> : null}
       </FormContext.Provider>
     </>
   );

@@ -52,8 +52,12 @@ export type PlanPricingContextType = {
 export const FormContext = React.createContext<FormContextType | null>(null);
 export const PlanPricingContext = React.createContext<PlanPricingContextType | null>(null);
 
-const Form = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+type Props = {
+  currentStep: number;
+  setCurrentStep: (step: number) => void;
+};
+
+const Form = (props: Props) => {
   const [pricing, setPricing] = useState(PlanPricing.MONTH);
 
   const [data, updateData] = useReducer(
@@ -79,41 +83,41 @@ const Form = () => {
   }, [pricing, setPricing]);
 
   const goToNextStep = () => {
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
+    const nextStep = props.currentStep + 1;
+    props.setCurrentStep(nextStep);
   };
 
   const returnToPreviousStep = () => {
-    const nextStep = currentStep - 1;
-    setCurrentStep(nextStep);
+    const nextStep = props.currentStep - 1;
+    props.setCurrentStep(nextStep);
   };
 
   return (
     <>
       <PlanPricingContext.Provider value={planContextValue}>
         <FormContext.Provider value={contextValue}>
-          {currentStep === 1 ? (
+          {props.currentStep === 1 ? (
             <PersonalInfoSection onClickNextStep={() => goToNextStep()}></PersonalInfoSection>
           ) : null}
-          {currentStep === 2 ? (
+          {props.currentStep === 2 ? (
             <PlanSection
               onClickNextStep={() => goToNextStep()}
               onClickGoBack={() => returnToPreviousStep()}
             ></PlanSection>
           ) : null}
-          {currentStep === 3 ? (
+          {props.currentStep === 3 ? (
             <AddOnsSection
               onClickNextStep={() => goToNextStep()}
               onClickGoBack={() => returnToPreviousStep()}
             ></AddOnsSection>
           ) : null}
-          {currentStep === 4 ? (
+          {props.currentStep === 4 ? (
             <ConfirmSection
               onConfirm={() => goToNextStep()}
               onClickGoBack={() => returnToPreviousStep()}
             ></ConfirmSection>
           ) : null}
-          {currentStep === 5 ? <ThankYouPage /> : null}
+          {props.currentStep === 5 ? <ThankYouPage /> : null}
         </FormContext.Provider>
       </PlanPricingContext.Provider>
     </>

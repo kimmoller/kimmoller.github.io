@@ -21,6 +21,11 @@
     text-align: center;
 }
 
+.selectedNumber {
+    background-color: var(--light-blue);
+    color: var(--marine-blue);
+}
+
 .step {
     color: var(--cool-gray);
 }

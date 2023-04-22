@@ -13,13 +13,15 @@ public class IdentityMapper {
   public static IdentityDto map(IdentityEntity identityEntity) {
     return IdentityDto.builder()
         .id(identityEntity.getId())
-        .username(identityEntity.getUsername())
+        .firstName(identityEntity.getFirstName())
+        .lastName(identityEntity.getLastName())
         .email(identityEntity.getEmail())
         .build();
   }
 
   public static void applyPatchToIdentityEntity(PatchIdentityDto patch, IdentityEntity target) {
-    applyPatch(patch::getUsername, target::setUsername);
+    applyPatch(patch::getFirstName, target::setFirstName);
+    applyPatch(patch::getLastName, target::setLastName);
     applyPatch(patch::getEmail, target::setEmail);
   }
 

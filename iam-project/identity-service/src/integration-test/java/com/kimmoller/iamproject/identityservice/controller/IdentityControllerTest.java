@@ -26,8 +26,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class IdentityControllerTest extends ControllerTest {
 
-  private static final String USERNAME = "testUsername";
-  private static final String EMAIL = "test.user@example.org";
+  private static final String FIRST_NAME = "John";
+  private static final String LAST_NAME = "Smith";
+  private static final String EMAIL = "john.smith@example.org";
   @Autowired IdentityRepository identityRepository;
 
   @Nested
@@ -39,7 +40,11 @@ public class IdentityControllerTest extends ControllerTest {
     @Order(1)
     void whenCreateIdentity_withValidData_returnCreatedIdentity() {
       var createIdentityRequest =
-          CreateIdentityRequestDto.builder().username(USERNAME).email(EMAIL).build();
+          CreateIdentityRequestDto.builder()
+              .firstName(FIRST_NAME)
+              .lastName(LAST_NAME)
+              .email(EMAIL)
+              .build();
       var identity =
           given()
               .contentType(ContentType.JSON)
@@ -47,7 +52,13 @@ public class IdentityControllerTest extends ControllerTest {
               .post("identity")
               .then()
               .expect(status().isCreated())
-              .body("username", is("testUsername"), "email", is("test.user@example.org"))
+              .body(
+                  "firstName",
+                  is("John"),
+                  "lastName",
+                  is("Smith"),
+                  "email",
+                  is("john.smith@example.org"))
               .extract()
               .as(IdentityDto.class);
       log.info(identity.toString());
@@ -61,21 +72,32 @@ public class IdentityControllerTest extends ControllerTest {
           .get("identity/" + identityId)
           .then()
           .expect(status().isOk())
-          .body("username", is("testUsername"), "email", is("test.user@example.org"));
+          .body(
+              "firstName",
+              is("John"),
+              "lastName",
+              is("Smith"),
+              "email",
+              is("john.smith@example.org"));
     }
 
     @Test
     @Order(3)
-    void whenUpdateIdentity_withOnlyUsernameInRequest_otherDataIsKeptIntact() {
-      var patchIdentityDto =
-          PatchIdentityDto.builder().username(Optional.of("patchedUsername")).build();
+    void whenUpdateIdentity_withOnlyLastNameInRequest_otherDataIsKeptIntact() {
+      var patchIdentityDto = PatchIdentityDto.builder().lastName(Optional.of("Snow")).build();
       given()
           .contentType(ContentType.JSON)
           .body(patchIdentityDto)
           .patch("identity/" + identityId)
           .then()
           .expect(status().isOk())
-          .body("username", is("patchedUsername"), "email", is("test.user@example.org"));
+          .body(
+              "firstName",
+              is("John"),
+              "lastName",
+              is("Snow"),
+              "email",
+              is("john.smith@example.org"));
     }
 
     @Test
@@ -83,8 +105,9 @@ public class IdentityControllerTest extends ControllerTest {
     void whenUpdateIdentity_withAllFieldsInRequest_allFieldsUpdated() {
       var patchIdentityDto =
           PatchIdentityDto.builder()
-              .username(Optional.of("updatedUsername"))
-              .email(Optional.of("updated.user@example.org"))
+              .firstName(Optional.of("Gary"))
+              .lastName(Optional.of("Guy"))
+              .email(Optional.of("gary.guy@example.org"))
               .build();
       given()
           .contentType(ContentType.JSON)
@@ -92,7 +115,8 @@ public class IdentityControllerTest extends ControllerTest {
           .patch("identity/" + identityId)
           .then()
           .expect(status().isOk())
-          .body("username", is("updatedUsername"), "email", is("updated.user@example.org"));
+          .body(
+              "firstName", is("Gary"), "lastName", is("Guy"), "email", is("gary.guy@example.org"));
     }
 
     @Test
@@ -111,22 +135,24 @@ public class IdentityControllerTest extends ControllerTest {
 
     @BeforeAll
     void initiateData() {
-      var identityEntity = IdentityEntity.builder().username(USERNAME).email(EMAIL).build();
+      var identityEntity =
+          IdentityEntity.builder().firstName(FIRST_NAME).lastName(LAST_NAME).email(EMAIL).build();
       var identity = identityRepository.save(identityEntity);
       identityId = identity.getId();
 
-      var identityEntityWithTakenUsername =
+      var identityWithTakenEmail =
           IdentityEntity.builder()
-              .username("takenUsername")
-              .email("taken.email@example.org")
+              .firstName(FIRST_NAME)
+              .lastName(LAST_NAME)
+              .email("taken.name@example.org")
               .build();
-      identityRepository.save(identityEntityWithTakenUsername);
+      identityRepository.save(identityWithTakenEmail);
     }
 
     @Test
-    void whenCreateIdentity_withUsernameMissing_return403BadRequest() {
+    void whenCreateIdentity_withNamesMissing_return403BadRequest() {
       var createIdentityRequest =
-          CreateIdentityRequestDto.builder().email("some.user@example.org").build();
+          CreateIdentityRequestDto.builder().email("john.smith@example.org").build();
       given()
           .contentType(ContentType.JSON)
           .body(createIdentityRequest)
@@ -136,9 +162,14 @@ public class IdentityControllerTest extends ControllerTest {
     }
 
     @Test
-    void whenCreateIdentity_withExistingUsername_return409Conflict() {
+    void whenCreateIdentity_withExistingEmail_return409Conflict() {
       var createIdentityRequest =
-          CreateIdentityRequestDto.builder().username(USERNAME).email(EMAIL).build();
+          CreateIdentityRequestDto.builder()
+              .firstName(FIRST_NAME)
+              .lastName(LAST_NAME)
+              .email(EMAIL)
+              .email(EMAIL)
+              .build();
       given()
           .contentType(ContentType.JSON)
           .body(createIdentityRequest)
@@ -153,21 +184,9 @@ public class IdentityControllerTest extends ControllerTest {
     }
 
     @Test
-    void whenUpdateIdentityUsername_withValueThatAlreadyExists_return409Conflict() {
-      var patchIdentityDto =
-          PatchIdentityDto.builder().username(Optional.of("takenUsername")).build();
-      given()
-          .contentType(ContentType.JSON)
-          .body(patchIdentityDto)
-          .patch("identity/" + identityId)
-          .then()
-          .expect(status().isConflict());
-    }
-
-    @Test
     void whenUpdateIdentityEmail_withValueThatAlreadyExists_return409Conflict() {
       var patchIdentityDto =
-          PatchIdentityDto.builder().email(Optional.of("taken.email@example.org")).build();
+          PatchIdentityDto.builder().email(Optional.of("taken.name@example.org")).build();
       given()
           .contentType(ContentType.JSON)
           .body(patchIdentityDto)

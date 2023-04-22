@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class IdentityEntity implements Serializable {
   @Id @GeneratedValue private UUID id;
 
-  private String username;
+  private String firstName;
+  private String lastName;
   private String email;
 }

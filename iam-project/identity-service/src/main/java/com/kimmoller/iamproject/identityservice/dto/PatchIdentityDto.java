@@ -16,7 +16,10 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PatchIdentityDto {
   @Schema(nullable = true)
-  private Optional<String> username;
+  private Optional<String> firstName;
+
+  @Schema(nullable = true)
+  private Optional<String> lastName;
 
   @Schema(nullable = true)
   private Optional<String> email;

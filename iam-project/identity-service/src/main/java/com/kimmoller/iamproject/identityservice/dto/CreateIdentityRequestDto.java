@@ -10,7 +10,10 @@ import lombok.Data;
 @Schema(name = "CreateIdentityRequestDto")
 public class CreateIdentityRequestDto {
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  @NotNull private String username;
+  @NotNull private String firstName;
+
+  @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull private String lastName;
 
   private String email;
 }

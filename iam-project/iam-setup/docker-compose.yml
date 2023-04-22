@@ -1,0 +1,30 @@
+version: "3.8"
+
+networks:
+  iam-project:
+    external: true
+
+services:
+  identity-db:
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - identity-db:/var/lib/postgresql/data
+    networks:
+      - iam-project
+
+  identity-service:
+    image: identity-service-local
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - identity-db
+
+volumes:
+  identity-db:

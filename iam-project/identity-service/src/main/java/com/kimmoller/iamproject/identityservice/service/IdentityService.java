@@ -3,9 +3,9 @@ package com.kimmoller.iamproject.identityservice.service;
 import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
 import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import com.kimmoller.iamproject.identityservice.utils.IdentityMapper;
-import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,8 @@ public class IdentityService {
    * @param patchIdentityDto Patch request dto
    * @return IdentityDto
    */
-  public IdentityDto patchIdentity(UUID id, PatchIdentityDto patchIdentityDto) throws EntityNotFoundException {
+  public IdentityDto patchIdentity(UUID id, PatchIdentityDto patchIdentityDto)
+      throws EntityNotFoundException {
     log.info("Applying patch for identity {}", id);
     var existingIdentity =
         identityRepository

@@ -14,14 +14,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(value = {EntityNotFoundException.class})
-  protected ResponseEntity<Object> handleEntityNotFound(RuntimeException exception, WebRequest webRequest) {
+  protected ResponseEntity<Object> handleEntityNotFound(
+      RuntimeException exception, WebRequest webRequest) {
     String bodyOfResponse = "Entity not found";
-    return handleExceptionInternal(exception, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, webRequest);
+    return handleExceptionInternal(
+        exception, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, webRequest);
   }
 
   @ExceptionHandler(DataIntegrityViolationException.class)
-  protected ResponseEntity<Object> handleDataIntegrityViolationException(RuntimeException exception, WebRequest webRequest) {
+  protected ResponseEntity<Object> handleDataIntegrityViolationException(
+      RuntimeException exception, WebRequest webRequest) {
     String bodyOfResponse = "Data conflict";
-    return handleExceptionInternal(exception, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, webRequest);
+    return handleExceptionInternal(
+        exception, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, webRequest);
   }
 }

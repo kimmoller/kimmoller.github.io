@@ -9,14 +9,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
-import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
+import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import io.restassured.http.ContentType;
 import java.util.Optional;
 import java.util.UUID;
-
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -34,8 +33,7 @@ public class IdentityControllerTest extends ControllerTest {
   private static final String PASSWORD = "testPassword";
 
   @Autowired ObjectMapper objectMapper;
-  @Autowired
-  IdentityRepository identityRepository;
+  @Autowired IdentityRepository identityRepository;
 
   @Nested
   @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

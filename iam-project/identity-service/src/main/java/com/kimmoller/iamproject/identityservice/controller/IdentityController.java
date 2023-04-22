@@ -4,9 +4,8 @@ import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
 import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.service.IdentityService;
-import java.util.UUID;
-
 import jakarta.validation.Valid;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,7 +37,8 @@ public class IdentityController {
   }
 
   @PatchMapping("identity/{id}")
-  public ResponseEntity<IdentityDto> patchIdentity(@PathVariable UUID id, @RequestBody PatchIdentityDto patchIdentityDto) {
+  public ResponseEntity<IdentityDto> patchIdentity(
+      @PathVariable UUID id, @RequestBody PatchIdentityDto patchIdentityDto) {
     var identity = identityService.patchIdentity(id, patchIdentityDto);
     return new ResponseEntity<>(identity, HttpStatus.OK);
   }

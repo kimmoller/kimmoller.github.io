@@ -6,7 +6,6 @@ import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +17,7 @@ public class IdentityMapper {
         .email(identityEntity.getEmail())
         .build();
   }
+
   public static void applyPatchToIdentityEntity(PatchIdentityDto patch, IdentityEntity target) {
     applyPatch(patch::getUsername, target::setUsername);
     applyPatch(patch::getEmail, target::setEmail);

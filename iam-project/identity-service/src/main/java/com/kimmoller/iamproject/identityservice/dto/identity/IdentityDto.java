@@ -1,4 +1,4 @@
-package com.kimmoller.iamproject.identityservice.dto;
+package com.kimmoller.iamproject.identityservice.dto.identity;
 
 import java.util.UUID;
 import lombok.Builder;

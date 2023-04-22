@@ -1,4 +1,4 @@
-package com.kimmoller.iamproject.identityservice.dto;
+package com.kimmoller.iamproject.identityservice.dto.identity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -6,9 +6,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
-import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.CreateIdentityRequestDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import io.restassured.http.ContentType;

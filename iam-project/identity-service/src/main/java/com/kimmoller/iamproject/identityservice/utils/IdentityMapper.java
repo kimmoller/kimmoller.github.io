@@ -1,7 +1,7 @@
 package com.kimmoller.iamproject.identityservice.utils;
 
-import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import java.util.Optional;
 import java.util.function.Consumer;

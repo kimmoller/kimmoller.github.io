@@ -5,26 +5,66 @@ networks:
     external: true
 
 services:
+  keycloak-db:
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    ports:
+      - "5431:5432"
+    volumes:
+      - keycloak-db:/var/lib/postgresql/keycloak
+    networks:
+      - iam-project
+
   identity-db:
     image: postgres:15.2-alpine
     restart: always
     environment:
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     volumes:
-      - identity-db:/var/lib/postgresql/data
+      - identity-db:/var/lib/postgresql/identity
     networks:
       - iam-project
 
+  keycloak:
+    depends_on:
+      - keycloak-db
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+      DB_VENDOR: postgres
+      DB_ADDR: keycloak-db
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      SSN_SALT: very-secret-salt
+    image: quay.io/keycloak/keycloak:21.1
+    ports:
+      - "9000:8080"
+    restart: unless-stopped
+    networks:
+      - iam-project
+    command: ["start-dev"]
+
   identity-service:
     image: identity-service-local
+    container_name: identity-service
     restart: always
     ports:
-      - "8080:8080"
+      - "9001:9001"
     depends_on:
       - identity-db
+    networks:
+      - iam-project
 
 volumes:
   identity-db:
+  keycloak-db:

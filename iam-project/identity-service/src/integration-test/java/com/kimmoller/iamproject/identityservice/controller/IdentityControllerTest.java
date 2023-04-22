@@ -3,11 +3,9 @@ package com.kimmoller.iamproject.identityservice.controller;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.when;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
 import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
@@ -30,9 +28,6 @@ public class IdentityControllerTest extends ControllerTest {
 
   private static final String USERNAME = "testUsername";
   private static final String EMAIL = "test.user@example.org";
-  private static final String PASSWORD = "testPassword";
-
-  @Autowired ObjectMapper objectMapper;
   @Autowired IdentityRepository identityRepository;
 
   @Nested
@@ -44,11 +39,7 @@ public class IdentityControllerTest extends ControllerTest {
     @Order(1)
     void whenCreateIdentity_withValidData_returnCreatedIdentity() {
       var createIdentityRequest =
-          CreateIdentityRequestDto.builder()
-              .username(USERNAME)
-              .email(EMAIL)
-              .password(PASSWORD)
-              .build();
+          CreateIdentityRequestDto.builder().username(USERNAME).email(EMAIL).build();
       var identity =
           given()
               .contentType(ContentType.JSON)
@@ -94,7 +85,6 @@ public class IdentityControllerTest extends ControllerTest {
           PatchIdentityDto.builder()
               .username(Optional.of("updatedUsername"))
               .email(Optional.of("updated.user@example.org"))
-              .password(Optional.of("patchedPassword"))
               .build();
       given()
           .contentType(ContentType.JSON)
@@ -103,11 +93,6 @@ public class IdentityControllerTest extends ControllerTest {
           .then()
           .expect(status().isOk())
           .body("username", is("updatedUsername"), "email", is("updated.user@example.org"));
-
-      // Fetch identity from repository to verify password is patched as password is not returned in
-      // the DTO.
-      var patchedIdentity = identityRepository.findById(identityId).orElseThrow();
-      assertEquals("patchedPassword", patchedIdentity.getPassword());
     }
 
     @Test
@@ -126,8 +111,7 @@ public class IdentityControllerTest extends ControllerTest {
 
     @BeforeAll
     void initiateData() {
-      var identityEntity =
-          IdentityEntity.builder().username(USERNAME).email(EMAIL).password(PASSWORD).build();
+      var identityEntity = IdentityEntity.builder().username(USERNAME).email(EMAIL).build();
       var identity = identityRepository.save(identityEntity);
       identityId = identity.getId();
 
@@ -135,16 +119,14 @@ public class IdentityControllerTest extends ControllerTest {
           IdentityEntity.builder()
               .username("takenUsername")
               .email("taken.email@example.org")
-              .password(PASSWORD)
               .build();
       identityRepository.save(identityEntityWithTakenUsername);
     }
 
     @Test
-    void whenCreateIdentity_withFieldsMissing_return403BadRequest() {
+    void whenCreateIdentity_withUsernameMissing_return403BadRequest() {
       var createIdentityRequest =
           CreateIdentityRequestDto.builder()
-              .username("someUsername")
               .email("some.user@example.org")
               .build();
       given()
@@ -158,11 +140,7 @@ public class IdentityControllerTest extends ControllerTest {
     @Test
     void whenCreateIdentity_withExistingUsername_return409Conflict() {
       var createIdentityRequest =
-          CreateIdentityRequestDto.builder()
-              .username(USERNAME)
-              .email(EMAIL)
-              .password(PASSWORD)
-              .build();
+          CreateIdentityRequestDto.builder().username(USERNAME).email(EMAIL).build();
       given()
           .contentType(ContentType.JSON)
           .body(createIdentityRequest)

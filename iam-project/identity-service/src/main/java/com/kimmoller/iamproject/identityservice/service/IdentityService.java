@@ -30,7 +30,6 @@ public class IdentityService {
         IdentityEntity.builder()
             .username(createIdentityRequestDto.getUsername())
             .email(createIdentityRequestDto.getEmail())
-            .password(createIdentityRequestDto.getPassword())
             .build();
     var savedEntity = identityRepository.save(identityEntity);
     log.info("Created new identity with username {}", savedEntity.getUsername());

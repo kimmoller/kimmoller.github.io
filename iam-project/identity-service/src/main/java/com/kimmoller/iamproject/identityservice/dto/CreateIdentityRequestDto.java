@@ -14,7 +14,4 @@ public class CreateIdentityRequestDto {
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
   @NotNull private String email;
-
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  @NotNull private String password;
 }

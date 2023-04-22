@@ -21,7 +21,6 @@ public class IdentityMapper {
   public static void applyPatchToIdentityEntity(PatchIdentityDto patch, IdentityEntity target) {
     applyPatch(patch::getUsername, target::setUsername);
     applyPatch(patch::getEmail, target::setEmail);
-    applyPatch(patch::getPassword, target::setPassword);
   }
 
   /**

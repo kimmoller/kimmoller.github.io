@@ -19,15 +19,13 @@ public class IdentityRepositoryTest extends RepositoryTest {
 
   private static final String USERNAME = "testUsername";
   private static final String EMAIL = "test.user@example.org";
-  private static final String PASSWORD = "testPassword";
 
   UUID identityId;
 
   @Test
   @Order(1)
   void whenSaveIdentity_withValidData_returnSavedIdentity() {
-    var identityEntity =
-        IdentityEntity.builder().username(USERNAME).email(EMAIL).password(PASSWORD).build();
+    var identityEntity = IdentityEntity.builder().username(USERNAME).email(EMAIL).build();
     var savedEntity = identityRepository.save(identityEntity);
     assertEquals(USERNAME, savedEntity.getUsername());
     identityId = savedEntity.getId();
@@ -36,8 +34,7 @@ public class IdentityRepositoryTest extends RepositoryTest {
   @Test
   @Order(2)
   void whenSaveIdentity_withNonUniqueUsername_throwError() {
-    var identityEntity =
-        IdentityEntity.builder().username(USERNAME).email(EMAIL).password(PASSWORD).build();
+    var identityEntity = IdentityEntity.builder().username(USERNAME).email(EMAIL).build();
     assertThrows(
         DataIntegrityViolationException.class, () -> identityRepository.save(identityEntity));
   }

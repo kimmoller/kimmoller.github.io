@@ -20,7 +20,4 @@ public class PatchIdentityDto {
 
   @Schema(nullable = true)
   private Optional<String> email;
-
-  @Schema(nullable = true)
-  private Optional<String> password;
 }

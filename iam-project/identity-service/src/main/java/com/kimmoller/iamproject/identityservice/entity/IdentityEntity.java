@@ -22,5 +22,4 @@ public class IdentityEntity implements Serializable {
 
   private String username;
   private String email;
-  private String password;
 }

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+help() {
+	echo "Usage: ./local-iam [command] [options]"
+	echo "Available commands: "
+	echo "    build               Build images"
+	echo "    deploy              Deploys/updates services"
+    echo "    stop                Stop specific service"
+    echo "    undeploy            Deletes services"
+}
+
+if [[ -z $1 ]]; then
+	help
+	exit 1
+fi
+
+COMMAND="$1"
+
+case "$COMMAND" in
+
+	"build")
+		./commands/build.sh "${@:2}"
+		;;
+	"deploy")
+		./commands/deploy.sh "${@:2}"
+		;;
+    "stop")
+		./commands/stop.sh "${@:2}"
+		;;
+    "undeploy")
+		./commands/undeploy.sh "${@:2}"
+		;;
+	"-h" | "--help")
+		help
+		exit 0
+		;;
+	*)
+		help
+		exit 0
+		;;
+
+esac

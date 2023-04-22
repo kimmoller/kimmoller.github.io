@@ -1,0 +1,102 @@
+plugins {
+	id 'java'
+	id 'jvm-test-suite'
+	id 'io.freefair.lombok' version '8.0.1'
+	id 'org.springframework.boot' version '3.0.5'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'com.diffplug.spotless' version '6.18.0'
+}
+
+group = 'com.kimmoller'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+sourceSets {
+	integrationTest {
+		java {
+			compileClasspath += main.output + test.output
+			runtimeClasspath += main.output + test.output
+			srcDir file('src/integration-test/java')
+		}
+		resources.srcDir file('src/main/resources')
+		resources.srcDir file('src/integration-test/resources')
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+
+	integrationTestCompileOnly.extendsFrom testCompileOnly
+	integrationTestImplementation.extendsFrom testImplementation
+	integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('testcontainersVersion', "1.18.0")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.apache.logging.log4j:log4j-bom:2.20.0'
+	implementation "io.swagger.core.v3:swagger-annotations:2.2.9"
+
+	compileOnly 'org.projectlombok:lombok'
+
+	runtimeOnly 'org.postgresql:postgresql'
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation "io.rest-assured:rest-assured"
+	testImplementation "io.rest-assured:rest-assured-all"
+	testImplementation "io.rest-assured:spring-mock-mvc"
+
+	testCompileOnly 'org.projectlombok:lombok'
+
+	testRuntimeOnly 'org.testcontainers:postgresql'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+	}
+}
+
+tasks.register('integrationTest', Test) {
+	testClassesDirs = sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+	useJUnitPlatform()
+}
+
+tasks.named('check') {
+	dependsOn(tasks.test)
+	dependsOn(tasks.integrationTest)
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+spotless {
+	java {
+		googleJavaFormat()
+		formatAnnotations()
+	}
+}
+
+tasks.register('goJF') {
+	dependsOn(tasks.spotlessJavaApply)
+}

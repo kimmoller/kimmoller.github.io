@@ -12,6 +12,5 @@ public class CreateIdentityRequestDto {
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
   @NotNull private String username;
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  @NotNull private String email;
+  private String email;
 }

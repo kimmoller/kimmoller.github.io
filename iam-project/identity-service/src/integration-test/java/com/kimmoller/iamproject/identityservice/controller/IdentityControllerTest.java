@@ -126,9 +126,7 @@ public class IdentityControllerTest extends ControllerTest {
     @Test
     void whenCreateIdentity_withUsernameMissing_return403BadRequest() {
       var createIdentityRequest =
-          CreateIdentityRequestDto.builder()
-              .email("some.user@example.org")
-              .build();
+          CreateIdentityRequestDto.builder().email("some.user@example.org").build();
       given()
           .contentType(ContentType.JSON)
           .body(createIdentityRequest)

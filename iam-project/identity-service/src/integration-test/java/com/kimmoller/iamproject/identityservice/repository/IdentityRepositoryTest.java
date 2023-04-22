@@ -58,4 +58,12 @@ public class IdentityRepositoryTest extends RepositoryTest {
     var nonExistingIdentity = identityRepository.findById(identityId);
     assertTrue(nonExistingIdentity.isEmpty());
   }
+
+  @Test
+  @Order(5)
+  void whenSaveIdentity_withOnlyUsername_returnSavedIdentity() {
+    var identityEntity = IdentityEntity.builder().username(USERNAME).build();
+    var savedEntity = identityRepository.save(identityEntity);
+    assertEquals(USERNAME, savedEntity.getUsername());
+  }
 }

@@ -1,11 +1,14 @@
 package com.kimmoller.iamproject.identityservice.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +27,7 @@ public class IdentityEntity implements Serializable {
   @NotNull private String firstName;
   @NotNull private String lastName;
   private String email;
+
+  @OneToMany(mappedBy = "identity", cascade = CascadeType.ALL)
+  private List<AccountEntity> accounts;
 }

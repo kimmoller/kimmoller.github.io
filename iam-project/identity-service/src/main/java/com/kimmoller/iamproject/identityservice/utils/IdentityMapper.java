@@ -5,6 +5,7 @@ import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -18,6 +19,7 @@ public class IdentityMapper {
         .firstName(identityEntity.getFirstName())
         .lastName(identityEntity.getLastName())
         .email(identityEntity.getEmail())
+        .accounts(map(identityEntity.getAccounts()))
         .build();
   }
 
@@ -27,6 +29,14 @@ public class IdentityMapper {
         .username(accountEntity.getUsername())
         .systemId(accountEntity.getSystemId())
         .build();
+  }
+
+  private static List<AccountDto> map(List<AccountEntity> accountEntities) {
+    if (accountEntities != null) {
+      return accountEntities.stream().map(IdentityMapper::map).toList();
+    } else {
+      return List.of();
+    }
   }
 
   public static void applyPatchToIdentityEntity(PatchIdentityDto patch, IdentityEntity target) {

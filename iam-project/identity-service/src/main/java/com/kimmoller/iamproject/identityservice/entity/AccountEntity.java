@@ -28,5 +28,5 @@ public class AccountEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "identity_id")
-  private IdentityEntity identityEntity;
+  private IdentityEntity identity;
 }

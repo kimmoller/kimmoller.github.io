@@ -1,7 +1,9 @@
 package com.kimmoller.iamproject.identityservice.utils;
 
+import com.kimmoller.iamproject.identityservice.dto.AccountDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -16,6 +18,14 @@ public class IdentityMapper {
         .firstName(identityEntity.getFirstName())
         .lastName(identityEntity.getLastName())
         .email(identityEntity.getEmail())
+        .build();
+  }
+
+  public static AccountDto map(AccountEntity accountEntity) {
+    return AccountDto.builder()
+        .id(accountEntity.getId())
+        .username(accountEntity.getUsername())
+        .systemId(accountEntity.getSystemId())
         .build();
   }
 

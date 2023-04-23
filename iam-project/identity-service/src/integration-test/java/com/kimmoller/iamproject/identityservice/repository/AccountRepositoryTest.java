@@ -33,25 +33,30 @@ public class AccountRepositoryTest extends RepositoryTest {
   @Order(1)
   void whenCreateAccount_withValidData_thenAccountReturned() {
     var accountEntity =
-        AccountEntity.builder()
-            .username(USERNAME)
-            .systemId(SYSTEM_ID)
-            .identityEntity(identity)
-            .build();
+        AccountEntity.builder().username(USERNAME).systemId(SYSTEM_ID).identity(identity).build();
     var savedAccount = accountRepository.save(accountEntity);
     assertEquals(USERNAME, savedAccount.getUsername());
     assertEquals(SYSTEM_ID, savedAccount.getSystemId());
-    assertEquals(identity.getId(), savedAccount.getIdentityEntity().getId());
+    assertEquals(identity.getId(), savedAccount.getIdentity().getId());
   }
 
   @Test
   @Order(2)
   void whenCreateAccount_withConflictingUsernameSystemIdPair_thenThrowError() {
     var accountEntity =
+        AccountEntity.builder().username(USERNAME).systemId(SYSTEM_ID).identity(identity).build();
+    assertThrows(
+        DataIntegrityViolationException.class, () -> accountRepository.save(accountEntity));
+  }
+
+  @Test
+  @Order(3)
+  void whenCreateAccount_withConflictingIdentityIdSystemIdPair_thenThrowError() {
+    var accountEntity =
         AccountEntity.builder()
-            .username(USERNAME)
+            .username("newUsername")
             .systemId(SYSTEM_ID)
-            .identityEntity(identity)
+            .identity(identity)
             .build();
     assertThrows(
         DataIntegrityViolationException.class, () -> accountRepository.save(accountEntity));

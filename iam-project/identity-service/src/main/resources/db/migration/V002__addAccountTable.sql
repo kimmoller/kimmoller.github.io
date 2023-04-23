@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS account (
     system_id VARCHAR(255) NOT NULL,
     identity_id UUID REFERENCES identity(id),
     PRIMARY KEY(id),
-    CONSTRAINT username_system_id UNIQUE (username, system_id)
+    CONSTRAINT username_system_id UNIQUE (username, system_id),
+    CONSTRAINT identity_id_system_id UNIQUE (identity_id, system_id)
 );

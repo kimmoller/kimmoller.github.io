@@ -41,6 +41,11 @@ public class AccountService {
     return IdentityMapper.map(accountEntity);
   }
 
+  /**
+   * Get accounts for creation with provision time null.
+   *
+   * @return List of account dtos
+   */
   public List<AccountDto> getAccountsToBeCreated() {
     var accounts = accountRepository.findAccountsToBeCreated();
     return accounts.stream().map(IdentityMapper::map).toList();

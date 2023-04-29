@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "account")
 @Table(name = "account")
 public class AccountEntity {
   @Id @GeneratedValue private UUID id;

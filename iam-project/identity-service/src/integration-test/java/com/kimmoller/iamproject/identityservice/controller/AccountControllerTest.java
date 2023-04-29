@@ -1,6 +1,7 @@
 package com.kimmoller.iamproject.identityservice.controller;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
@@ -71,6 +72,12 @@ public class AccountControllerTest extends ControllerTest {
 
   @Test
   @Order(3)
+  void whenGetAccountsToBeCreated_returnAccountsWithNullProvisionAndCommitTime() {
+    given().get("/account/toBeCreated").then().expect(status().isOk()).body("$", hasSize(1));
+  }
+
+  @Test
+  @Order(4)
   void whenPatchAccount_withProvisionTime_returnAccountDtoWithProvisionTimeNotNull() {
     var patchRequest =
         PatchAccountDto.builder().creationProvisionTime(Optional.of(OffsetDateTime.now())).build();
@@ -84,7 +91,13 @@ public class AccountControllerTest extends ControllerTest {
   }
 
   @Test
-  @Order(4)
+  @Order(5)
+  void whenGetAccountsToBeCreated_andAllAccountsProvisioned_returnEmptyList() {
+    given().get("/account/toBeCreated").then().expect(status().isOk()).body("$", hasSize(0));
+  }
+
+  @Test
+  @Order(6)
   void whenPatchAccount_withCommitTime_returnAccountDtoWithAllTimesSet() {
     var patchRequest =
         PatchAccountDto.builder().creationCommitTime(Optional.of(OffsetDateTime.now())).build();
@@ -98,7 +111,7 @@ public class AccountControllerTest extends ControllerTest {
   }
 
   @Test
-  @Order(5)
+  @Order(7)
   void whenDeleteAccountWithIdentityIdAndSystemId_accountDeleted() {
     given()
         .delete("identity/" + identity.getId() + "/account/" + SYSTEM_ID)

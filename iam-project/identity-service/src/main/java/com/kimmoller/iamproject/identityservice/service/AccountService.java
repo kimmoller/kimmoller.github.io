@@ -8,6 +8,7 @@ import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import com.kimmoller.iamproject.identityservice.utils.IdentityMapper;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,11 @@ public class AccountService {
                         String.format(
                             "No %s account found for identity %s", systemId, identityId)));
     return IdentityMapper.map(accountEntity);
+  }
+
+  public List<AccountDto> getAccountsToBeCreated() {
+    var accounts = accountRepository.findAccountsToBeCreated();
+    return accounts.stream().map(IdentityMapper::map).toList();
   }
 
   /**

@@ -1,4 +1,4 @@
-package com.kimmoller.iamproject.identityservice.dto;
+package com.kimmoller.iamproject.identityservice.dto.identity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -10,11 +10,10 @@ import lombok.Data;
 @Schema(name = "CreateIdentityRequestDto")
 public class CreateIdentityRequestDto {
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  @NotNull private String username;
+  @NotNull private String firstName;
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  @NotNull private String email;
+  @NotNull private String lastName;
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  @NotNull private String password;
+  private String email;
 }

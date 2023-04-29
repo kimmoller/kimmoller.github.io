@@ -1,8 +1,8 @@
 package com.kimmoller.iamproject.identityservice.service;
 
-import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
-import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.CreateIdentityRequestDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import com.kimmoller.iamproject.identityservice.utils.IdentityMapper;
@@ -25,15 +25,18 @@ public class IdentityService {
    * @return IdentityDto
    */
   public IdentityDto createIdentity(CreateIdentityRequestDto createIdentityRequestDto) {
-    log.info("Creating new identity with username {}", createIdentityRequestDto.getUsername());
+    log.info(
+        "Creating new identity {} {}",
+        createIdentityRequestDto.getFirstName(),
+        createIdentityRequestDto.getLastName());
     var identityEntity =
         IdentityEntity.builder()
-            .username(createIdentityRequestDto.getUsername())
+            .firstName(createIdentityRequestDto.getFirstName())
+            .lastName(createIdentityRequestDto.getLastName())
             .email(createIdentityRequestDto.getEmail())
-            .password(createIdentityRequestDto.getPassword())
             .build();
     var savedEntity = identityRepository.save(identityEntity);
-    log.info("Created new identity with username {}", savedEntity.getUsername());
+    log.info("Created new identity {} {}", savedEntity.getFirstName(), savedEntity.getLastName());
     return IdentityMapper.map(savedEntity);
   }
 

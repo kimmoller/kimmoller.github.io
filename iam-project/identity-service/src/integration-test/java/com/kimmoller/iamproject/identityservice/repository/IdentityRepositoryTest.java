@@ -17,9 +17,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 public class IdentityRepositoryTest extends RepositoryTest {
   @Autowired IdentityRepository identityRepository;
 
-  private static final String USERNAME = "testUsername";
-  private static final String EMAIL = "test.user@example.org";
-  private static final String PASSWORD = "testPassword";
+  private static final String FIRST_NAME = "John";
+  private static final String LAST_NAME = "Smith";
+  private static final String EMAIL = "john.smith@example.org";
 
   UUID identityId;
 
@@ -27,17 +27,19 @@ public class IdentityRepositoryTest extends RepositoryTest {
   @Order(1)
   void whenSaveIdentity_withValidData_returnSavedIdentity() {
     var identityEntity =
-        IdentityEntity.builder().username(USERNAME).email(EMAIL).password(PASSWORD).build();
+        IdentityEntity.builder().firstName(FIRST_NAME).lastName(LAST_NAME).email(EMAIL).build();
     var savedEntity = identityRepository.save(identityEntity);
-    assertEquals(USERNAME, savedEntity.getUsername());
+    assertEquals(FIRST_NAME, savedEntity.getFirstName());
+    assertEquals(LAST_NAME, savedEntity.getLastName());
+    assertEquals(EMAIL, savedEntity.getEmail());
     identityId = savedEntity.getId();
   }
 
   @Test
   @Order(2)
-  void whenSaveIdentity_withNonUniqueUsername_throwError() {
+  void whenSaveIdentity_withNonUniqueEmail_throwError() {
     var identityEntity =
-        IdentityEntity.builder().username(USERNAME).email(EMAIL).password(PASSWORD).build();
+        IdentityEntity.builder().firstName(FIRST_NAME).lastName(LAST_NAME).email(EMAIL).build();
     assertThrows(
         DataIntegrityViolationException.class, () -> identityRepository.save(identityEntity));
   }
@@ -60,5 +62,14 @@ public class IdentityRepositoryTest extends RepositoryTest {
 
     var nonExistingIdentity = identityRepository.findById(identityId);
     assertTrue(nonExistingIdentity.isEmpty());
+  }
+
+  @Test
+  @Order(5)
+  void whenSaveIdentity_withOnlyNames_returnSavedIdentity() {
+    var identityEntity = IdentityEntity.builder().firstName(FIRST_NAME).lastName(LAST_NAME).build();
+    var savedEntity = identityRepository.save(identityEntity);
+    assertEquals(FIRST_NAME, savedEntity.getFirstName());
+    assertEquals(LAST_NAME, savedEntity.getLastName());
   }
 }

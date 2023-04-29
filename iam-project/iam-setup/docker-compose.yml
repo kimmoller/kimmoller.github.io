@@ -59,11 +59,9 @@ services:
     container_name: identity-service
     restart: always
     ports:
-      - "9001:9001"
+      - "8300:8300"
     depends_on:
       - identity-db
-    networks:
-      - iam-project
 
 volumes:
   identity-db:

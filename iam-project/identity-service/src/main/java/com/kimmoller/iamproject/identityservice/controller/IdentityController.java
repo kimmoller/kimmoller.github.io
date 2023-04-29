@@ -1,8 +1,8 @@
 package com.kimmoller.iamproject.identityservice.controller;
 
-import com.kimmoller.iamproject.identityservice.dto.CreateIdentityRequestDto;
-import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.CreateIdentityRequestDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.service.IdentityService;
 import jakarta.validation.Valid;
 import java.util.UUID;

@@ -1,8 +1,12 @@
 package com.kimmoller.iamproject.identityservice.utils;
 
-import com.kimmoller.iamproject.identityservice.dto.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
+import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -13,15 +17,41 @@ public class IdentityMapper {
   public static IdentityDto map(IdentityEntity identityEntity) {
     return IdentityDto.builder()
         .id(identityEntity.getId())
-        .username(identityEntity.getUsername())
+        .firstName(identityEntity.getFirstName())
+        .lastName(identityEntity.getLastName())
         .email(identityEntity.getEmail())
+        .accounts(map(identityEntity.getAccounts()))
         .build();
   }
 
+  public static AccountDto map(AccountEntity accountEntity) {
+    return AccountDto.builder()
+        .id(accountEntity.getId())
+        .username(accountEntity.getUsername())
+        .systemId(accountEntity.getSystemId())
+        .creationTime(accountEntity.getCreationTime())
+        .creationProvisionTime(accountEntity.getCreationProvisionTime())
+        .creationCommitTime(accountEntity.getCreationCommitTime())
+        .build();
+  }
+
+  private static List<AccountDto> map(List<AccountEntity> accountEntities) {
+    if (accountEntities != null) {
+      return accountEntities.stream().map(IdentityMapper::map).toList();
+    } else {
+      return List.of();
+    }
+  }
+
   public static void applyPatchToIdentityEntity(PatchIdentityDto patch, IdentityEntity target) {
-    applyPatch(patch::getUsername, target::setUsername);
+    applyPatch(patch::getFirstName, target::setFirstName);
+    applyPatch(patch::getLastName, target::setLastName);
     applyPatch(patch::getEmail, target::setEmail);
-    applyPatch(patch::getPassword, target::setPassword);
+  }
+
+  public static void applyPatchToAccountEntity(PatchAccountDto patch, AccountEntity target) {
+    applyPatch(patch::getCreationProvisionTime, target::setCreationProvisionTime);
+    applyPatch(patch::getCreationCommitTime, target::setCreationCommitTime);
   }
 
   /**

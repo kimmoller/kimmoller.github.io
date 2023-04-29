@@ -2,12 +2,17 @@ package com.kimmoller.iamproject.identityservice.controller;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.kimmoller.iamproject.identityservice.dto.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import io.restassured.http.ContentType;
+import java.time.OffsetDateTime;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -41,7 +46,17 @@ public class AccountControllerTest extends ControllerTest {
         .post("/identity/" + identity.getId() + "/account")
         .then()
         .expect(status().isCreated())
-        .body("username", is(USERNAME), "systemId", is(SYSTEM_ID));
+        .body(
+            "username",
+            is(USERNAME),
+            "systemId",
+            is(SYSTEM_ID),
+            "creationTime",
+            notNullValue(),
+            "creationProvisionTime",
+            nullValue(),
+            "creationCommitTime",
+            nullValue());
   }
 
   @Test
@@ -56,6 +71,34 @@ public class AccountControllerTest extends ControllerTest {
 
   @Test
   @Order(3)
+  void whenPatchAccount_withProvisionTime_returnAccountDtoWithProvisionTimeNotNull() {
+    var patchRequest =
+        PatchAccountDto.builder().creationProvisionTime(Optional.of(OffsetDateTime.now())).build();
+    given()
+        .contentType(ContentType.JSON)
+        .body(patchRequest)
+        .patch("identity/" + identity.getId() + "/account/" + SYSTEM_ID)
+        .then()
+        .expect(status().isOk())
+        .body("creationProvisionTime", notNullValue(), "creationCommitTime", nullValue());
+  }
+
+  @Test
+  @Order(4)
+  void whenPatchAccount_withCommitTime_returnAccountDtoWithAllTimesSet() {
+    var patchRequest =
+        PatchAccountDto.builder().creationCommitTime(Optional.of(OffsetDateTime.now())).build();
+    given()
+        .contentType(ContentType.JSON)
+        .body(patchRequest)
+        .patch("identity/" + identity.getId() + "/account/" + SYSTEM_ID)
+        .then()
+        .expect(status().isOk())
+        .body("creationProvisionTime", notNullValue(), "creationCommitTime", notNullValue());
+  }
+
+  @Test
+  @Order(5)
   void whenDeleteAccountWithIdentityIdAndSystemId_accountDeleted() {
     given()
         .delete("identity/" + identity.getId() + "/account/" + SYSTEM_ID)

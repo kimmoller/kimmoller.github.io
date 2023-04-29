@@ -1,11 +1,13 @@
 package com.kimmoller.iamproject.identityservice.service;
 
-import com.kimmoller.iamproject.identityservice.dto.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.repository.AccountRepository;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import com.kimmoller.iamproject.identityservice.utils.IdentityMapper;
 import jakarta.persistence.EntityNotFoundException;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +60,7 @@ public class AccountService {
         AccountEntity.builder()
             .username(accountDto.getUsername())
             .systemId(accountDto.getSystemId())
+            .creationTime(OffsetDateTime.now())
             .identity(identity)
             .build();
     var savedAccount = accountRepository.save(accountEntity);
@@ -66,6 +69,30 @@ public class AccountService {
         savedAccount.getSystemId(),
         savedAccount.getIdentity().getId());
     return IdentityMapper.map(savedAccount);
+  }
+
+  /**
+   * Patch identity account.
+   *
+   * @param identityId Identity ID
+   * @param systemId Account system ID
+   * @param patchAccountDto Patch account request
+   * @return Account DTO
+   */
+  public AccountDto patchAccount(
+      UUID identityId, String systemId, PatchAccountDto patchAccountDto) {
+    log.info("Patch identity {} account {} with request {}", identityId, systemId, patchAccountDto);
+    var account =
+        accountRepository
+            .findAccountByIdentityIdAndSystemId(identityId, systemId)
+            .orElseThrow(
+                () ->
+                    new EntityNotFoundException(
+                        String.format("Identity %s account %s not found", identityId, systemId)));
+    IdentityMapper.applyPatchToAccountEntity(patchAccountDto, account);
+    accountRepository.save(account);
+    log.info("Identity {} account {} patched", identityId, systemId);
+    return IdentityMapper.map(account);
   }
 
   /**

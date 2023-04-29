@@ -1,6 +1,7 @@
 package com.kimmoller.iamproject.identityservice.controller;
 
-import com.kimmoller.iamproject.identityservice.dto.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.service.AccountService;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +33,15 @@ public class AccountController {
       @PathVariable UUID identityId, @RequestBody AccountDto accountDto) {
     var account = accountService.createNewAccount(identityId, accountDto);
     return new ResponseEntity<>(account, HttpStatus.CREATED);
+  }
+
+  @PatchMapping("/identity/{identityId}/account/{systemId}")
+  public ResponseEntity<AccountDto> patchAccount(
+      @PathVariable UUID identityId,
+      @PathVariable String systemId,
+      @RequestBody PatchAccountDto patchAccountDto) {
+    var account = accountService.patchAccount(identityId, systemId, patchAccountDto);
+    return new ResponseEntity<>(account, HttpStatus.OK);
   }
 
   @DeleteMapping("/identity/{identityId}/account/{systemId}")

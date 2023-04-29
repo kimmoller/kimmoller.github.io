@@ -4,7 +4,7 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.kimmoller.iamproject.identityservice.dto.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.CreateIdentityRequestDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
 import io.restassured.http.ContentType;

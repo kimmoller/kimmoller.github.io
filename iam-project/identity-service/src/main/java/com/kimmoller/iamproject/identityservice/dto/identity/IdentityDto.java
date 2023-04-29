@@ -1,6 +1,6 @@
 package com.kimmoller.iamproject.identityservice.dto.identity;
 
-import com.kimmoller.iamproject.identityservice.dto.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.UUID;

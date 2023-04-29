@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,11 @@ public class AccountEntity {
 
   @NotNull private String username;
   @NotNull private String systemId;
+
+  @NotNull private OffsetDateTime creationTime;
+
+  private OffsetDateTime creationProvisionTime;
+  private OffsetDateTime creationCommitTime;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "identity_id")

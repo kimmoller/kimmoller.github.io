@@ -1,6 +1,7 @@
 package com.kimmoller.iamproject.identityservice.utils;
 
-import com.kimmoller.iamproject.identityservice.dto.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
+import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
 import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
@@ -28,6 +29,9 @@ public class IdentityMapper {
         .id(accountEntity.getId())
         .username(accountEntity.getUsername())
         .systemId(accountEntity.getSystemId())
+        .creationTime(accountEntity.getCreationTime())
+        .creationProvisionTime(accountEntity.getCreationProvisionTime())
+        .creationCommitTime(accountEntity.getCreationCommitTime())
         .build();
   }
 
@@ -43,6 +47,11 @@ public class IdentityMapper {
     applyPatch(patch::getFirstName, target::setFirstName);
     applyPatch(patch::getLastName, target::setLastName);
     applyPatch(patch::getEmail, target::setEmail);
+  }
+
+  public static void applyPatchToAccountEntity(PatchAccountDto patch, AccountEntity target) {
+    applyPatch(patch::getCreationProvisionTime, target::setCreationProvisionTime);
+    applyPatch(patch::getCreationCommitTime, target::setCreationCommitTime);
   }
 
   /**

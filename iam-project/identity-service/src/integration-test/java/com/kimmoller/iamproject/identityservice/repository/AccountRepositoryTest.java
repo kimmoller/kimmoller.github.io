@@ -1,10 +1,12 @@
 package com.kimmoller.iamproject.identityservice.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
+import java.time.OffsetDateTime;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -33,18 +35,29 @@ public class AccountRepositoryTest extends RepositoryTest {
   @Order(1)
   void whenCreateAccount_withValidData_thenAccountReturned() {
     var accountEntity =
-        AccountEntity.builder().username(USERNAME).systemId(SYSTEM_ID).identity(identity).build();
+        AccountEntity.builder()
+            .username(USERNAME)
+            .systemId(SYSTEM_ID)
+            .identity(identity)
+            .creationTime(OffsetDateTime.now())
+            .build();
     var savedAccount = accountRepository.save(accountEntity);
     assertEquals(USERNAME, savedAccount.getUsername());
     assertEquals(SYSTEM_ID, savedAccount.getSystemId());
     assertEquals(identity.getId(), savedAccount.getIdentity().getId());
+    assertNotNull(savedAccount.getCreationTime());
   }
 
   @Test
   @Order(2)
   void whenCreateAccount_withConflictingUsernameSystemIdPair_thenThrowError() {
     var accountEntity =
-        AccountEntity.builder().username(USERNAME).systemId(SYSTEM_ID).identity(identity).build();
+        AccountEntity.builder()
+            .username(USERNAME)
+            .systemId(SYSTEM_ID)
+            .identity(identity)
+            .creationTime(OffsetDateTime.now())
+            .build();
     assertThrows(
         DataIntegrityViolationException.class, () -> accountRepository.save(accountEntity));
   }
@@ -57,6 +70,7 @@ public class AccountRepositoryTest extends RepositoryTest {
             .username("newUsername")
             .systemId(SYSTEM_ID)
             .identity(identity)
+            .creationTime(OffsetDateTime.now())
             .build();
     assertThrows(
         DataIntegrityViolationException.class, () -> accountRepository.save(accountEntity));

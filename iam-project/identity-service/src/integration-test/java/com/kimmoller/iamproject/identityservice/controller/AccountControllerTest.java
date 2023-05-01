@@ -7,8 +7,8 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
-import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.AccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import io.restassured.http.ContentType;

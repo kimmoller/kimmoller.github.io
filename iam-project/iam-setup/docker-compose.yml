@@ -7,6 +7,7 @@ networks:
 services:
   keycloak-db:
     image: postgres:15.2-alpine
+    container_name: keycloak-db
     restart: always
     environment:
       - POSTGRES_DB=keycloak
@@ -21,6 +22,7 @@ services:
 
   identity-db:
     image: postgres:15.2-alpine
+    container_name: identity-db
     restart: always
     environment:
       - POSTGRES_DB=postgres
@@ -54,6 +56,13 @@ services:
       - iam-project
     command: ["start-dev"]
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbit-mq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   identity-service:
     image: identity-service-local
     container_name: identity-service
@@ -62,6 +71,24 @@ services:
       - "8300:8300"
     depends_on:
       - identity-db
+
+  change-listener:
+    image: change-listener-local
+    container_name: change-listener
+    restart: always
+    ports:
+      - "8301:8301"
+    depends_on:
+      - rabbitmq
+
+  keycloak-public-handler:
+    image: keycloak-public-handler-local
+    container_name: keycloak-public-handler
+    restart: always
+    ports:
+      - "8302:8302"
+    depends_on:
+      - rabbitmq
 
 volumes:
   identity-db:

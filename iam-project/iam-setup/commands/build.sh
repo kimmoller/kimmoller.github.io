@@ -2,6 +2,8 @@
 
 REPOS=(
 	"identity-service"
+	"change-listener"
+	"keycloak-public-handler"
 )
 
 findRepo() {

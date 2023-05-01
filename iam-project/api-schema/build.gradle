@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'io.freefair.lombok' version '8.0.1'
+    id 'com.diffplug.spotless' version '6.18.0'
+}
+
+group = 'org.kimmoller.iamproject'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.9'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.0'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        formatAnnotations()
+    }
+}
+
+tasks.register('goJF') {
+    dependsOn(tasks.spotlessJavaApply)
+}

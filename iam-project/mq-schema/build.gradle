@@ -1,0 +1,47 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'io.freefair.lombok' version '8.0.1'
+    id 'com.diffplug.spotless' version '6.18.0'
+}
+
+group = 'com.kimmoller.iamproject'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+    implementation 'com.kimmoller.iamproject:api-schema:0.0.1-SNAPSHOT'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        formatAnnotations()
+    }
+}
+
+tasks.register('goJF') {
+    dependsOn(tasks.spotlessJavaApply)
+}
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = uri("${buildDir}/publishing-repository")
+        }
+    }
+}

@@ -2,7 +2,6 @@ package com.kimmoller.iamproject.apischema.dto.account;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +15,8 @@ public class AccountDto {
   private UUID id;
   private String username;
   private String systemId;
+
+  private UUID identityId;
 
   private OffsetDateTime creationTime;
   private OffsetDateTime creationProvisionTime;

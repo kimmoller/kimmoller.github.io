@@ -1,0 +1,94 @@
+plugins {
+	id 'java'
+	id 'io.freefair.lombok' version '8.0.1'
+	id 'org.springframework.boot' version '3.0.5'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'com.diffplug.spotless' version '6.18.0'
+	id 'com.google.cloud.tools.jib' version '3.3.1'
+}
+
+group = 'com.kimmoller.iamproject'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+sourceSets {
+	integrationTest {
+		java {
+			compileClasspath += main.output + test.output
+			runtimeClasspath += main.output + test.output
+			srcDir file('src/integration-test/java')
+		}
+		resources.srcDir file('src/main/resources')
+		resources.srcDir file('src/integration-test/resources')
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+
+	integrationTestCompileOnly.extendsFrom testCompileOnly
+	integrationTestImplementation.extendsFrom testImplementation
+	integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.apache.logging.log4j:log4j-bom:2.20.0'
+	implementation 'io.swagger.core.v3:swagger-annotations:2.2.9'
+
+	implementation 'com.kimmoller.iamproject:api-schema:0.0.2-SNAPSHOT'
+	implementation 'com.kimmoller.iamproject:mq-schema:0.0.2-SNAPSHOT'
+
+	compileOnly 'org.projectlombok:lombok'
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation "io.rest-assured:rest-assured"
+	testImplementation "io.rest-assured:rest-assured-all"
+	testImplementation "io.rest-assured:spring-mock-mvc"
+
+	testCompileOnly 'org.projectlombok:lombok'
+}
+
+tasks.register('integrationTest', Test) {
+	testClassesDirs = sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+	useJUnitPlatform()
+}
+
+tasks.named('check') {
+	dependsOn(tasks.test)
+	dependsOn(tasks.integrationTest)
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+spotless {
+	java {
+		googleJavaFormat()
+		formatAnnotations()
+	}
+}
+
+tasks.register('goJF') {
+	dependsOn(tasks.spotlessJavaApply)
+}
+
+jib {
+	from.image = 'eclipse-temurin:17.0.2_8-jre'
+	to.image = '743790536429.dkr.ecr.eu-north-1.amazonaws.com/iam-project/change-listener'
+}

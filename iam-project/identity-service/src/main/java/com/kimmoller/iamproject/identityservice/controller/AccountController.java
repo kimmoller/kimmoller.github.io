@@ -1,7 +1,7 @@
 package com.kimmoller.iamproject.identityservice.controller;
 
-import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
-import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.AccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.service.AccountService;
 import java.util.List;
 import java.util.UUID;

@@ -1,7 +1,7 @@
 package com.kimmoller.iamproject.identityservice.service;
 
-import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
-import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.AccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.PatchAccountDto;
 import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.repository.AccountRepository;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;

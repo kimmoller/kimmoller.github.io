@@ -1,8 +1,8 @@
 package com.kimmoller.iamproject.identityservice.service;
 
-import com.kimmoller.iamproject.identityservice.dto.identity.CreateIdentityRequestDto;
-import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
+import com.kimmoller.iamproject.apischema.dto.identity.CreateIdentityRequestDto;
+import com.kimmoller.iamproject.apischema.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.apischema.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import com.kimmoller.iamproject.identityservice.repository.IdentityRepository;
 import com.kimmoller.iamproject.identityservice.utils.IdentityMapper;

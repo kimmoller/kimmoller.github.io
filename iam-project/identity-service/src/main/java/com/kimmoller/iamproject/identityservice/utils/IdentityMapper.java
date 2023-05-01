@@ -1,9 +1,9 @@
 package com.kimmoller.iamproject.identityservice.utils;
 
-import com.kimmoller.iamproject.identityservice.dto.account.AccountDto;
-import com.kimmoller.iamproject.identityservice.dto.account.PatchAccountDto;
-import com.kimmoller.iamproject.identityservice.dto.identity.IdentityDto;
-import com.kimmoller.iamproject.identityservice.dto.identity.PatchIdentityDto;
+import com.kimmoller.iamproject.apischema.dto.account.AccountDto;
+import com.kimmoller.iamproject.apischema.dto.account.PatchAccountDto;
+import com.kimmoller.iamproject.apischema.dto.identity.IdentityDto;
+import com.kimmoller.iamproject.apischema.dto.identity.PatchIdentityDto;
 import com.kimmoller.iamproject.identityservice.entity.AccountEntity;
 import com.kimmoller.iamproject.identityservice.entity.IdentityEntity;
 import java.util.List;
@@ -32,6 +32,7 @@ public class IdentityMapper {
         .creationTime(accountEntity.getCreationTime())
         .creationProvisionTime(accountEntity.getCreationProvisionTime())
         .creationCommitTime(accountEntity.getCreationCommitTime())
+        .identityId(accountEntity.getIdentity().getId())
         .build();
   }
 

@@ -69,17 +69,16 @@ public class AccountProvisioningTask {
     var message = objectMapper.writeValueAsString(accountLifecycleEventDto);
     log.info("Sending message {} to queue", message);
     rabbitTemplate.convertAndSend(
-        "keycloak-public-exchange",
-        "keycloak.public." + accountDto.getUsername(),
-        message);
+        "keycloak-public-exchange", "keycloak.public." + accountDto.getUsername(), message);
   }
 
   private void patchAccountProvisionTime(AccountDto accountDto) throws IOException {
-    log.info("Patch identity {} account {} provision time", accountDto.getIdentityId(), accountDto.getSystemId());
+    log.info(
+        "Patch identity {} account {} provision time",
+        accountDto.getIdentityId(),
+        accountDto.getSystemId());
     var patchAccountDto =
-        PatchAccountDto.builder()
-            .creationProvisionTime(Optional.of(OffsetDateTime.now()))
-            .build();
+        PatchAccountDto.builder().creationProvisionTime(Optional.of(OffsetDateTime.now())).build();
     var patchResponse =
         httpApiService.patchRequest(
             IDENTITY_SERVICE_BASE_URL
@@ -89,6 +88,9 @@ public class AccountProvisioningTask {
                 + accountDto.getSystemId(),
             patchAccountDto);
     patchResponse.close();
-    log.info("Identity {} account {} provision time patched", accountDto.getIdentityId(), accountDto.getSystemId());
+    log.info(
+        "Identity {} account {} provision time patched",
+        accountDto.getIdentityId(),
+        accountDto.getSystemId());
   }
 }

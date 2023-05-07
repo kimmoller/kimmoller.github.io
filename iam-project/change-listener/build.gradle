@@ -45,8 +45,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.apache.logging.log4j:log4j-bom:2.20.0'
 	implementation 'io.swagger.core.v3:swagger-annotations:2.2.9'
+	implementation 'com.squareup.okhttp3:okhttp:4.11.0'
 
-	implementation 'com.kimmoller.iamproject:api-schema:0.0.2-SNAPSHOT'
+	implementation 'com.kimmoller.iamproject:api-schema:0.0.3-SNAPSHOT'
 	implementation 'com.kimmoller.iamproject:mq-schema:0.0.2-SNAPSHOT'
 
 	compileOnly 'org.projectlombok:lombok'

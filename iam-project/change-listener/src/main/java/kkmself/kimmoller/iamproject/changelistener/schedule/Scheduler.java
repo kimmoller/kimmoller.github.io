@@ -1,6 +1,6 @@
-package com.kimmoller.iamproject.changelistener.schedule;
+package kkmself.kimmoller.iamproject.changelistener.schedule;
 
-import com.kimmoller.iamproject.changelistener.action.AccountProvisioningTask;
+import kkmself.kimmoller.iamproject.changelistener.action.AccountProvisioningTask;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;

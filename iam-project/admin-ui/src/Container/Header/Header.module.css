@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    height: 8%;
+    width: 100%;
+    background-color: var(--color-highlight-dark);
+    color: var(--color-almost-white);
+    align-items: center;
+}
+
+.title {
+    margin-left: 20%;
+}

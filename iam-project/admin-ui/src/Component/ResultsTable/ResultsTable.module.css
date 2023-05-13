@@ -1,0 +1,37 @@
+.resultsTable {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.headerRow {
+  background-color: var(--color-highlight-dark);
+  color: var(--color-almost-white);
+  height: 64px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.headerRow th {
+  padding-left: 24px;
+}
+
+.dataRow {
+  background-color: var(--color-highlight-light);
+  border-bottom: 1px solid var(--color-highlight-dark);
+  height: 48px;
+}
+
+.dataRow td {
+  padding-left: 24px;
+}
+
+.buttonData {
+  cursor: pointer;
+  color: var(--color-call-to-action);
+  font-weight: bold;
+}
+
+.buttonData:hover {
+  color: var(--color-call-to-action-alternative);
+}

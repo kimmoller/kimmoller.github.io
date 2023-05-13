@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--color-highlight-light);
+  height: 12%;
+}
+
+.title {
+  margin-left: 21%;
+}
+
+.link {
+  font-size: 24px;
+  margin-left: 21%;
+  width: fit-content;
+}

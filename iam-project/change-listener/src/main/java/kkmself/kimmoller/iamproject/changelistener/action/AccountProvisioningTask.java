@@ -51,12 +51,8 @@ public class AccountProvisioningTask {
   }
 
   private List<AccountDto> getAccountsToBeCreated() throws IOException {
-    var response = httpApiService.getRequest(IDENTITY_SERVICE_BASE_URL + "/account/toBeCreated");
-    List<AccountDto> accounts =
-        objectMapper.readValue(
-            response.body().string(), new TypeReference<ArrayList<AccountDto>>() {});
-    response.close();
-    return accounts;
+    var url = IDENTITY_SERVICE_BASE_URL + "/account/toBeCreated";
+    return httpApiService.toList(httpApiService.getRequest(url), AccountDto.class);
   }
 
   private void sendAccountCreationToQueue(AccountDto accountDto) throws JsonProcessingException {

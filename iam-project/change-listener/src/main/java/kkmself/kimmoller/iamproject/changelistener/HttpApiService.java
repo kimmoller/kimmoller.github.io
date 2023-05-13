@@ -1,7 +1,10 @@
 package kkmself.kimmoller.iamproject.changelistener;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -31,5 +34,31 @@ public class HttpApiService {
             .header("Content-Type", "application/json")
             .build();
     return okHttpClient.newCall(request).execute();
+  }
+
+  public <T> T toObject(Response response, Class<T> type) throws IOException {
+    return objectMapper.readValue(response.body().string(), type);
+  }
+
+  public <T> List<T> toList(Response response, Class<T> classz) throws IOException {
+    JavaType type = objectMapper.getTypeFactory().constructCollectionType(List.class, classz);
+    List<T> returnValue = objectMapper.readValue(response.body().string(), type);
+    response.close();
+    return returnValue;
+  }
+
+  private class TestClass {
+    private Response response;
+
+    // Upper toList here
+
+    // Return this object from getRequest so that that call can then call this toLisT
+    public toList() {
+
+    }
+
+    public toObject() {
+
+    }
   }
 }

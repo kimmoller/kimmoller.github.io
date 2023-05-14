@@ -1,4 +1,4 @@
-package com.kimmoller.iamproject.changelistener;
+package kkmself.kimmoller.iamproject.changelistener;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

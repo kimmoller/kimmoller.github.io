@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import TextInput from "../../Component/TextInput/TextInput";
 import ResultsTable from "../../Component/ResultsTable/ResultsTable";
 import * as mockIdentites from "../../mockData/identitySearchData.json";
+import { Identity } from "../../Types/Identity.types";
 import styles from "./IdentitySearch.module.css";
-
-type Identity = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-};
 
 const IdentitySearch = () => {
   const [identitySearchValue, setIdentitySearchValue] = useState("");
@@ -56,15 +50,20 @@ const IdentitySearch = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Identities</h2>
-      <TextInput
-        id='identity'
-        name='identity'
-        label='Search'
-        placeholder='Enter name or id'
-        value={identitySearchValue}
-        onChange={(event) => onIdentitySearchChange(event)}
-        onKeyDown={(event) => onIdentitySearchKeyDown(event)}
-      />
+      <div className={styles.actionContainer}>
+        <TextInput
+          id='identity'
+          name='identity'
+          label='Search'
+          placeholder='Enter name or id'
+          value={identitySearchValue}
+          onChange={(event) => onIdentitySearchChange(event)}
+          onKeyDown={(event) => onIdentitySearchKeyDown(event)}
+        />
+        <button className={styles.addIdentity} type='button'>
+          Add identity
+        </button>
+      </div>
       <div className={styles.resultsTableContainer}>
         <ResultsTable header={getResultsTableHeaderRow()} data={getResultsData()} />
       </div>

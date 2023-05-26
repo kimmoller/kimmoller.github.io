@@ -1,0 +1,67 @@
+:root {
+  --font-weight-medium: 550;
+  --font-weight-bold: 700;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  --color-background: #faf2e7;
+  --color-text: #1f1f1f;
+  --color-button-primary: #b51111;
+  --color-button-secondary: #111111;
+  --color-accent: #3c7544;
+
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vh;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+body.light-mode {
+  --color-background: #faf2e7;
+  --color-text: #1f1f1f;
+  --color-button-primary: #b51111;
+  --color-button-secondary: #111111;
+  --color-accent: #3c7544;
+}
+
+body.dark-mode {
+  --color-background: #340c34;
+  --color-text: #f0f0f0;
+  --color-button-primary: #57b7c8;
+  --color-button-secondary: #eeedfc;
+  --color-accent: #c40f0f;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0.5em 0;
+}
+
+a {
+  color: var(--color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --color-background: #340c34;
+    --color-text: #f0f0f0;
+    --color-button-primary: #57b7c8;
+    --color-button-secondary: #eeedfc;
+    --color-accent: #c40f0f;
+  }
+}

@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  column-gap: 2em;
+  font-size: 1.1em;
+}
+
+.link {
+  display: flex;
+  column-gap: 0.5em;
+}
+
+.number {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-medium);
+}

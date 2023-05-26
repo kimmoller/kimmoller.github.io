@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 2em;
+  align-items: center;
+  height: 3vh;
+}
+
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5em;
+  margin-left: 1em;
+}
+
+.logoContainer svg {
+  width: 5em;
+  height: auto;
+  color: var(--color-accent);
+}
+
+.externalLinksContainer {
+  display: flex;
+  column-gap: 2em;
+  align-items: center;
+}
+
+.icon {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.icon:hover {
+  color: var(--color-accent);
+}

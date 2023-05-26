@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  column-gap: 2em;
+  margin: 10em 18em;
+  height: 50%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  margin-top: 5em;
+}
+
+.description {
+  font-size: 1.5em;
+  width: 70%;
+}
+
+.image {
+  border: 5px solid var(--color-accent);
+  flex-basis: 40%;
+}

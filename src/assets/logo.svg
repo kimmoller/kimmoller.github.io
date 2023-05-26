@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="212mm"
+   height="169mm"
+   viewBox="0 0 212 169"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="portfolioLogo2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.914906"
+     inkscape:cx="220.2412"
+     inkscape:cy="556.3413"
+     inkscape:window-width="2560"
+     inkscape:window-height="1417"
+     inkscape:window-x="2552"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1819">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1815" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop1817" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1819"
+       id="linearGradient1821"
+       x1="63.415192"
+       y1="124.78539"
+       x2="142.09422"
+       y2="124.78539"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:3.09797;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="path169"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="51.765335"
+       sodipodi:cy="126.66602"
+       sodipodi:r1="82.287651"
+       sodipodi:r2="71.263199"
+       sodipodi:arg1="1.0442397"
+       sodipodi:arg2="1.5678385"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 93.119766,197.80721 10.832475,198.0506 -30.521956,126.90942 10.410904,55.524836 92.698195,55.281442 134.05263,126.42263 Z"
+       inkscape:transform-center-y="-1.3599392e-05"
+       transform="matrix(1.2547952,0,0,1.147868,41.033908,-61.096465)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:69.7267px;font-family:'BIZ UDPMincho';-inkscape-font-specification:'BIZ UDPMincho, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:28.9449;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0;paint-order:normal"
+       x="49.697247"
+       y="108.73422"
+       id="text1012"
+       transform="scale(0.94652772,1.0564931)"><tspan
+         id="tspan1010"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:69.7267px;font-family:'BIZ UDPMincho';-inkscape-font-specification:'BIZ UDPMincho, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:28.9449;stroke-opacity:0"
+         x="49.697247"
+         y="108.73422"
+         sodipodi:role="line">KM</tspan></text>
+  </g>
+</svg>

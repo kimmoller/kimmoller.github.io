@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  flex-basis: 8%;
+  row-gap: 1em;
+}
+
+.icon {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.icon:hover {
+  color: var(--color-accent);
+}

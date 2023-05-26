@@ -1,0 +1,9 @@
+#root {
+  margin: 0 auto;
+  width: 100vw;
+}
+
+.mainView {
+  display: flex;
+  height: 94vh;
+}

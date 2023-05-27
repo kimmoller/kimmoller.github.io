@@ -1,25 +1,41 @@
+import { useState } from "react";
+import { PersonIcon, RocketIcon, RulerSquareIcon } from "@radix-ui/react-icons";
+import Career from "../../Component/Button/Career/Career";
+import About from "../../Component/About/About";
+import Introduction from "../../Component/Introduction/Introduction";
+import Projects from "../../Component/Projects/Projects";
+import Button from "../../Component/Button/Button";
 import styles from "./Content.module.css";
 
+enum Phase {
+  INTRODUCTION,
+  ABOUT,
+  CAREER,
+  PROJECTS,
+}
+
 const Content = () => {
+  const [phase, setPhase] = useState(Phase.INTRODUCTION);
+
+  const onClick = (phase: Phase) => {
+    setPhase(phase);
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.content}>
-        <h1>Building enjoyable web experiences</h1>
-        <span className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
-        </span>
+        {phase === Phase.INTRODUCTION ? <Introduction /> : null}
+        {phase === Phase.ABOUT ? <About /> : null}
+        {phase === Phase.CAREER ? <Career /> : null}
+        {phase === Phase.PROJECTS ? <Projects /> : null}
       </div>
-      <div className={styles.image}></div>
+      <div className={styles.buttonContainer}>
+        <Button value='About' onClick={() => onClick(Phase.ABOUT)} iconLeft={<PersonIcon />} />
+        <Button value='Career' onClick={() => onClick(Phase.CAREER)} iconLeft={<RocketIcon />} />
+        <Button value='Projects' onClick={() => onClick(Phase.PROJECTS)} iconLeft={<RulerSquareIcon />} />
+      </div>
     </section>
   );
 };
-
-// Divide into 4 parts
-// Introduction
-// About
-// Projects / Career
-// Skills
 
 export default Content;

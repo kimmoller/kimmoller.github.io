@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  margin-top: 4em;
+}
+
+.description {
+  font-size: 1.5em;
+  width: 70%;
+}
+
+.image {
+  border: 5px solid var(--color-accent);
+  flex-basis: 40%;
+}

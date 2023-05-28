@@ -10,10 +10,10 @@ const Header = () => {
         <Logo />
       </div>
       <div className={styles.externalLinksContainer}>
-        <a href='https://github.com/kimmoller'>
+        <a href='https://github.com/kimmoller' target='_blank' rel='noopener noreferrer'>
           <GitHubLogoIcon className={styles.icon} />
         </a>
-        <a href='https://www.linkedin.com/in/mollerkim/'>
+        <a href='https://www.linkedin.com/in/mollerkim/' target='_blank' rel='noopener noreferrer'>
           <LinkedInLogoIcon className={styles.icon} />
         </a>
         <ThemeSelector />

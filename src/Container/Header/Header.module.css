@@ -10,12 +10,12 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  margin-top: 1.5em;
+  margin-top: 3em;
   margin-left: 1em;
 }
 
 .logoContainer svg {
-  width: 5em;
+  width: 7em;
   height: auto;
   color: var(--color-accent);
 }
@@ -24,11 +24,12 @@
   display: flex;
   column-gap: 2em;
   align-items: center;
+  margin-top: 2em;
 }
 
 .icon {
-  width: 2.5em;
-  height: 2.5em;
+  width: 3em;
+  height: 3em;
 }
 
 .icon:hover {

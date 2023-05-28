@@ -1,19 +1,17 @@
 import { ReactElement } from "react";
-import styles from "./Button.module.css";
+import styles from "./IconButton.module.css";
 
 type Props = {
-  value: string;
+  icon: ReactElement;
   onClick: () => void;
-  iconLeft?: ReactElement;
 };
 
-const Button = (props: Props) => {
+const IconButton = (props: Props) => {
   return (
     <button type='button' className={styles.button} onClick={() => props.onClick()}>
-      {props.iconLeft}
-      {props.value}
+      {props.icon}
     </button>
   );
 };
 
-export default Button;
+export default IconButton;
